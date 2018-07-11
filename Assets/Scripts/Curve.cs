@@ -42,11 +42,11 @@ public class Curve {
 		return C;
 	}
 
-	public List<Vector3> Samples (int n) {
-		var samples = new List<Vector3>();
+	public Vector3[] Samples (int n) {
+		var samples = new Vector3[n];
 
-		for (float t = 0; t < 1; t += 1/n)
-			samples.Add(Position(t));
+		for (int i = 0; i < n; i++)
+			samples[i] = Position(i * (1.0f / n));
 		
 		return samples;
 	}
