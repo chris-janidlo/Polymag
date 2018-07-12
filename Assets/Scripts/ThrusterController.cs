@@ -27,18 +27,11 @@ public class ThrusterController : MonoBehaviour {
 			}
 		}
 
-		Debug.Log("");
-		Debug.Log(transform.TransformDirection(desiredLinearVelocity));
-		Debug.Log(rb.velocity);
 		Vector3 linearAccel = acceleration(transform.TransformDirection(desiredLinearVelocity) - rb.velocity, topLinearAcceleration);
 		Vector3 angularAccel = acceleration(transform.TransformDirection(desiredAngularVelocity) - rb.angularVelocity, topAngularAcceleration);
 
 		rb.AddRelativeTorque(angularAccel, ForceMode.Acceleration);
 		rb.AddRelativeForce(linearAccel, ForceMode.Acceleration);
-		// transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + angularAccel);
-
-		// Debug.Log(rigidbody.velocity);
-		// Debug.Log(rigidbody.angularVelocity);
 	}
 
 	Vector3 acceleration (Vector3 deltaV, Vector3 topAcceleration) {
