@@ -12,6 +12,9 @@ public class TrackController : MonoBehaviour {
 	public float Speed;
 	public bool RideEnabled;
 
+	[Tooltip("Spawned at intervals along the line. Used by the player object to determine distance")]
+	public Collider CenterGameobject;
+
 	[Tooltip("Define multiple line renderers here. Lines are distributed equally in a circle around the center, definition line")]
 	public LineRenderer[] Lines;
 	[Tooltip("Distance from each line to the center")]
@@ -28,11 +31,16 @@ public class TrackController : MonoBehaviour {
 
 	Curve previous { get { return curves[curves.Count - 1]; } }
 
+	Transform markerParent;
+
 	float s = 0;
 
 	void Start () {
 		Instance = this;
 		curves = new List<Curve>();
+
+		markerParent = new GameObject("Line Markers").transform;
+		markerParent.parent = transform;
 
 		Vector3 next = Vector3.forward * 10;
 		curves.Add(new Curve(Vector3.back, Vector3.zero, next, next + newPointOffset()));
@@ -77,13 +85,11 @@ public class TrackController : MonoBehaviour {
 
 		curves.Add(next);
 
-		extendLines();
-	}
-
-	void extendLines () {
 		var samples = previous.Samples(DotsPerLine);
 
 		foreach (Vector3 point in samples) {
+
+			Instantiate(CenterGameobject, point, Quaternion.identity).transform.parent = markerParent;
 
 			float angle = 0;
 			foreach (var line in Lines) {
