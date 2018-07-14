@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 135498496136693074}
   m_Layer: 8
   m_Name: Line Marker
-  m_TagString: Untagged
+  m_TagString: Line Markers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,5 +50,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}

@@ -53,6 +53,7 @@ public class Curve {
 
 	// returns instantaneous derivative at time t on curve
 	// from https://math.stackexchange.com/a/848290/574705
+	// FIXME: seems to return the same velocity at all points
 	public Vector3 Velocity (float t) {
 		Vector3 Q1 = (p1 - p0) / (t1 - t0) - (p2 - p0) / (t2 - t0) + (p2 - p1) / (t2 - t1);
 		Vector3 Q2 = (p2 - p1) / (t2 - t1) - (p3 - p1) / (t3 - t1) + (p3 - p2) / (t3 - t2);
