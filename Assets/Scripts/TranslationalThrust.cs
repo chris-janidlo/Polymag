@@ -8,32 +8,39 @@ using UnityEditor;
 #endif
 
 [RequireComponent(typeof(ThrusterController))]
-public class Thruster : MonoBehaviour {
+public class TranslationalThrust : MonoBehaviour {
 
 	public string InputAxisName;
 	
 	public Vector3 ForceAxis;
-	public bool IsRotation;
+	public float Thrust;
 
-	public float TopAcceleration, TopSpeed;//, DecelTime = .1f;
+	public bool Activated { get; private set; }
 
-	public Vector3 ForceAxisNormalized { get; private set; }
-	public Vector3 DesiredVelocity { get; private set; }
+	Vector3 forceAxisNormalized;
+	float input;
+
+	Rigidbody rb;
 
 	void Start () {
 		OnValidate();
+		rb = GetComponent<Rigidbody>();
 	}
 
 	void Update () {
 		checkForceAxis();
 
-		float input = Input.GetAxis(InputAxisName);
-		DesiredVelocity = ForceAxisNormalized * TopSpeed * input;
+		input = Input.GetAxis(InputAxisName);
+	}
 
+	void FixedUpdate () {
+		Activated = input != 0;
+
+		rb.AddRelativeForce(forceAxisNormalized * Thrust * input);
 	}
 
 	void OnValidate () {
-		ForceAxisNormalized = ForceAxis.normalized;
+		forceAxisNormalized = ForceAxis.normalized;
 #if UNITY_EDITOR
 		if (EditorApplication.isPlaying) checkForceAxis();
 #endif
@@ -41,7 +48,7 @@ public class Thruster : MonoBehaviour {
 
 	[Conditional("UNITY_EDITOR")]
 	void checkForceAxis () {
-		if (ForceAxisNormalized.Equals(Vector3.zero)) {
+		if (forceAxisNormalized.Equals(Vector3.zero)) {
 			throw new Exception("'" + InputAxisName + "' thruster: ForceAxis " + ForceAxis.ToString() + " is too small to be used as a direction");
 		}
 	}

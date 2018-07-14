@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ThrusterController : MonoBehaviour {
 
+	public float MaxSpeed;
+	public float DecelTime;
+
+	bool decelerating;
+	float decelTime;
+	Vector3 speedAtDecel;
+
 	Rigidbody rb;
 
 	void Start () {
@@ -12,37 +19,31 @@ public class ThrusterController : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-
-		Vector3 desiredLinearVelocity = Vector3.zero, desiredAngularVelocity = Vector3.zero;
-		Vector3 topLinearAcceleration = Vector3.zero, topAngularAcceleration = Vector3.zero;
-
-		foreach (var thruster in GetComponents<Thruster>()) {
-			if (thruster.IsRotation) {
-				desiredAngularVelocity += thruster.DesiredVelocity;
-				topAngularAcceleration += thruster.ForceAxisNormalized * thruster.TopAcceleration;
-			}
-			else {
-				desiredLinearVelocity += thruster.DesiredVelocity;
-				topLinearAcceleration += thruster.ForceAxisNormalized * thruster.TopAcceleration;
+		bool shouldDecelerate = true;
+		foreach (TranslationalThrust thruster in GetComponents<TranslationalThrust>()) {
+			if (thruster.Activated) {
+				shouldDecelerate = false;
+				break;
 			}
 		}
 
-		Vector3 linearAccel = acceleration(transform.TransformDirection(desiredLinearVelocity) - rb.velocity, topLinearAcceleration);
-		Vector3 angularAccel = acceleration(transform.TransformDirection(desiredAngularVelocity) - rb.angularVelocity, topAngularAcceleration);
+		if (shouldDecelerate) {
+			if (!decelerating) {
+				decelerating = true;
 
-		rb.AddRelativeTorque(angularAccel, ForceMode.Acceleration);
-		rb.AddRelativeForce(linearAccel, ForceMode.Acceleration);
-	}
-
-	Vector3 acceleration (Vector3 deltaV, Vector3 topAcceleration) {
-		Vector3 accel = deltaV / Time.deltaTime;
-
-		for (int i = 0; i < 3; i++) {
-			if (Mathf.Abs(accel[i]) > topAcceleration[i]) {
-				accel[i] = topAcceleration[i] * Mathf.Sign(accel[i]);
+				decelTime = 0;
+				speedAtDecel = rb.velocity;
 			}
+			rb.velocity = Vector3.Lerp(speedAtDecel, Vector3.zero, decelTime);
+			decelTime += Time.deltaTime / DecelTime;
+		}
+		else {
+			decelerating = false;
 		}
 
-		return accel;
+		if (rb.velocity.sqrMagnitude > MaxSpeed * MaxSpeed) {
+			rb.velocity = rb.velocity.normalized * MaxSpeed;
+		}
 	}
+
 }

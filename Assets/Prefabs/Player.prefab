@@ -22,12 +22,10 @@ GameObject:
   - component: {fileID: 54632960762008972}
   - component: {fileID: 114499631268536348}
   - component: {fileID: 114938381621089256}
+  - component: {fileID: 114005474506727728}
   - component: {fileID: 114740522870437376}
-  - component: {fileID: 114079553229343268}
   - component: {fileID: 114687204479574522}
   - component: {fileID: 114484310220094558}
-  - component: {fileID: 114377886802008266}
-  - component: {fileID: 114231963776799512}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -241,7 +239,7 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353239022731290}
   m_Enabled: 1
---- !u!114 &114079553229343268
+--- !u!114 &114005474506727728
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -249,46 +247,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132401655793598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3487167299c3a40bd8bec0de2efaa6c1, type: 3}
+  m_Script: {fileID: 11500000, guid: b0a71930445244541bafd0080552c6ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputAxisName: Backward Thrust
-  ForceAxis: {x: 0, y: 0, z: 1}
-  IsRotation: 0
-  TopAcceleration: 5
-  TopSpeed: 7
---- !u!114 &114231963776799512
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1132401655793598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3487167299c3a40bd8bec0de2efaa6c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InputAxisName: Yaw
-  ForceAxis: {x: 0, y: 1, z: 0}
-  IsRotation: 1
-  TopAcceleration: 5
-  TopSpeed: 1
---- !u!114 &114377886802008266
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1132401655793598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3487167299c3a40bd8bec0de2efaa6c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InputAxisName: Pitch
-  ForceAxis: {x: 1, y: 0, z: 0}
-  IsRotation: 1
-  TopAcceleration: 5
-  TopSpeed: 1
+  PitchInputAxis: Pitch
+  YawInputAxis: Turn
+  TurnSpeed: 1
 --- !u!114 &114484310220094558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -300,11 +264,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3487167299c3a40bd8bec0de2efaa6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputAxisName: Horizontal Thrust
+  InputAxisName: Strafe
   ForceAxis: {x: 1, y: 0, z: 0}
-  IsRotation: 0
-  TopAcceleration: 5
-  TopSpeed: 13
+  Thrust: 19.5
 --- !u!114 &114499631268536348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,11 +290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3487167299c3a40bd8bec0de2efaa6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputAxisName: Vertical Thrust
+  InputAxisName: Lift
   ForceAxis: {x: 0, y: 1, z: 0}
-  IsRotation: 0
-  TopAcceleration: 5
-  TopSpeed: 7
+  Thrust: 19.5
 --- !u!114 &114740522870437376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -344,11 +304,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3487167299c3a40bd8bec0de2efaa6c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InputAxisName: Forward Thrust
+  InputAxisName: Jet
   ForceAxis: {x: 0, y: 0, z: 1}
-  IsRotation: 0
-  TopAcceleration: 5
-  TopSpeed: 15
+  Thrust: 10.5
 --- !u!114 &114938381621089256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,6 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2770a2fa81ef46da938e83015da1fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxSpeed: 19.5
+  DecelTime: 2
 --- !u!124 &124078158926670940
 Behaviour:
   m_ObjectHideFlags: 1
