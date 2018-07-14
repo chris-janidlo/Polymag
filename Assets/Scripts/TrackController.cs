@@ -28,19 +28,23 @@ public class TrackController : MonoBehaviour {
 	public Vector3 Velocity { get; private set; }
 
 	List<Curve> curves;
+	List<GameObject> curveObjects;
+	int curveCount = 0;
 
 	Curve previous { get { return curves[curves.Count - 1]; } }
 
-	Transform markerParent;
+	Transform curveParent;
 
 	float s = 0;
 
 	void Start () {
 		Instance = this;
-		curves = new List<Curve>();
 
-		markerParent = new GameObject("Line Markers").transform;
-		markerParent.parent = transform;
+		curves = new List<Curve>();
+		curveObjects = new List<GameObject>();
+
+		curveParent = new GameObject("Curves").transform;
+		curveParent.parent = transform;
 
 		Vector3 next = Vector3.forward * 10;
 		curves.Add(new Curve(Vector3.back, Vector3.zero, next, next + newPointOffset()));
@@ -62,8 +66,14 @@ public class TrackController : MonoBehaviour {
 
 		if (s >= 1) {
 			s -= 1;
+
 			addNewCurve();
+			
 			curves.RemoveAt(0);
+			Destroy(curveObjects[0], 10);
+			curveObjects.RemoveAt(0);
+
+			// FIXME: remove line renderer parts for old curve
 
 			Curve tmp = curves[0];
 		}
@@ -85,11 +95,15 @@ public class TrackController : MonoBehaviour {
 
 		curves.Add(next);
 
+		var parent = new GameObject("Curve " + curveCount++);
+		parent.transform.parent = curveParent;
+		curveObjects.Add(parent);
+
 		var samples = previous.Samples(DotsPerLine);
 
 		foreach (Vector3 point in samples) {
 
-			Instantiate(CenterGameobject, point, Quaternion.identity).transform.parent = markerParent;
+			Instantiate(CenterGameobject, point, Quaternion.identity).transform.parent = parent.transform;
 
 			float angle = 0;
 			foreach (var line in Lines) {
