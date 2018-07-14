@@ -20,6 +20,10 @@ public class Thruster : MonoBehaviour {
 	public Vector3 ForceAxisNormalized { get; private set; }
 	public Vector3 DesiredVelocity { get; private set; }
 
+	void Start () {
+		OnValidate();
+	}
+
 	void Update () {
 		checkForceAxis();
 
