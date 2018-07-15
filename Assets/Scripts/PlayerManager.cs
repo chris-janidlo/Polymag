@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour {
 	public Text CenterText;
 	public Camera CameraT;
 	public GameObject PlayerVisual;
+	public bool Started;
 
 	public float RotationTime = 1;
 	public float RotateDelay;
@@ -39,6 +40,8 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	IEnumerator startRoutine () {
+		Started = false;
+
 		yield return null;
 		SetControlsActive(false);
 		TrackController.Instance.RideEnabled = false;
@@ -66,6 +69,7 @@ public class PlayerManager : MonoBehaviour {
 
 		CenterText.text = "go";
 		SetControlsActive(true);
+		Started = true;
 		yield return new WaitForSeconds(1);
 		CenterText.text = "";
 
