@@ -9,8 +9,11 @@ public class TrackController : MonoBehaviour {
 	public int NumberOfCurves;
 
 	public GameObject Rider;
-	public float Speed;
 	public bool RideEnabled;
+
+	public float Speed;
+	public float SpeedIncrease;
+	public float MaxSpeed;
 
 	[Tooltip("Spawned at intervals along the line. Used by the player object to determine distance")]
 	public Collider CenterGameobject;
@@ -67,6 +70,8 @@ public class TrackController : MonoBehaviour {
 		// FIXME: position should(?) change at a constant velocity, but it doesn't
 		s += Speed / Velocity.magnitude * Time.deltaTime;
 
+		Speed = Mathf.Min(Speed + SpeedIncrease * Time.deltaTime, MaxSpeed);
+
 		if (s >= 1) {
 			s -= 1;
 
@@ -86,7 +91,7 @@ public class TrackController : MonoBehaviour {
 	}
 
 	Vector3 newPointOffset () {
-		Vector2 xy = Random.insideUnitCircle * 60;
+		Vector2 xy = Random.insideUnitCircle * (60 + curveCount / 2.0f);
 		float z = Random.Range(30, 50);
 
 		return new Vector3(xy.x, xy.y, z);

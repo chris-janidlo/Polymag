@@ -362,7 +362,7 @@ MonoBehaviour:
   CameraT: {fileID: 1004522576}
   PlayerVisual: {fileID: 1417765389}
   RotationTime: 4
-  RotateDelay: 0
+  RotateDelay: 0.3
   EvilDelay: 2
 --- !u!1001 &622004864
 Prefab:
@@ -420,7 +420,22 @@ Prefab:
     - target: {fileID: 114893767333157624, guid: ac6d166ddd5c140cca83e4f636b3765f,
         type: 2}
       propertyPath: Speed
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114893767333157624, guid: ac6d166ddd5c140cca83e4f636b3765f,
+        type: 2}
+      propertyPath: SpeedIncrease
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114893767333157624, guid: ac6d166ddd5c140cca83e4f636b3765f,
+        type: 2}
+      propertyPath: MaxSpeed
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 114893767333157624, guid: ac6d166ddd5c140cca83e4f636b3765f,
+        type: 2}
+      propertyPath: NumberOfCurves
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac6d166ddd5c140cca83e4f636b3765f, type: 2}
