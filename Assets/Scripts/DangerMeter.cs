@@ -7,15 +7,15 @@ public class DangerMeter : MonoBehaviour {
 
 	public float MaxDangerDistance, SafeDistance;
 
-	Image meter;
-
-	void Start () {
-		meter = GetComponent<Image>();
-	}
+	public Image Meter;
 	
 	void Update () {
 		float dist = EvilPlane.Instance.Distance;
-		meter.fillAmount = (dist - SafeDistance) / (MaxDangerDistance - SafeDistance);
+		Meter.fillAmount = (dist - SafeDistance) / (MaxDangerDistance - SafeDistance);
+		
+		if (PlayerManager.Instance.Dead) {
+			gameObject.SetActive(false);
+		}
 	}
 
 }
