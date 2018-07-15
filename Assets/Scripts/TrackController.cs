@@ -15,12 +15,15 @@ public class TrackController : MonoBehaviour {
 	[Tooltip("Spawned at intervals along the line. Used by the player object to determine distance")]
 	public Collider CenterGameobject;
 
+	public LineRenderer CenterLine;
+
 	[Tooltip("Define multiple line renderers here. Lines are distributed equally in a circle around the center, definition line")]
 	public LineRenderer[] Lines;
 	[Tooltip("Distance from each line to the center")]
 	public float LineDistance = 5;
 	[Tooltip("Resolution of each line")]
 	public int DotsPerLine = 20;
+	public int CenterObjectsPerLine = 5;
 	
 	public static TrackController Instance;
 
@@ -101,9 +104,24 @@ public class TrackController : MonoBehaviour {
 
 		var samples = previous.Samples(DotsPerLine);
 
-		foreach (Vector3 point in samples) {
+		int centerCycleCounter = 0;
+		int centerCycle = DotsPerLine / CenterObjectsPerLine;
 
-			Instantiate(CenterGameobject, point, Quaternion.identity).transform.parent = parent.transform;
+		Vector3 centerDirection = Vector3.zero;
+
+		for (int i = 0; i < samples.Length; i++) {
+
+			Vector3 point = samples[i];
+
+			centerDirection += point - (i > 0 ? samples[i-1] : point);
+
+			if (centerCycleCounter++ >= centerCycle) {
+				Instantiate(CenterGameobject, point, Quaternion.Euler(samples[i-1] - point)).transform.parent = parent.transform;
+				centerDirection = Vector3.zero;
+				centerCycleCounter = 0;
+			}
+
+			CenterLine.SetPosition(CenterLine.positionCount++, point);
 
 			float angle = 0;
 			foreach (var line in Lines) {

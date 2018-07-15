@@ -5,8 +5,8 @@ using UnityEngine;
 public class LineDetection : MonoBehaviour {
 
 	public float OffroadDrag = 1;
+	public float Tolerance = 0.01f;
 	
-	float tolerance = 0.01f;
 	bool offroad;
 
 	int layerMask = 1 << 8;
@@ -17,7 +17,7 @@ public class LineDetection : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!Physics.CheckSphere(transform.position, tolerance, layerMask, QueryTriggerInteraction.Collide)) {
+		if (!Physics.CheckSphere(transform.position, Tolerance, layerMask, QueryTriggerInteraction.Collide)) {
 			if (!offroad) {
 				rb.drag = OffroadDrag;
 				offroad = true;
