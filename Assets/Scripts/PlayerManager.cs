@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour {
 	public GameObject PlayerVisual;
 
 	public float RotationTime = 1;
+	public float RotateDelay;
 	public float EvilDelay;
 
 	public bool Dead { get; private set; }
@@ -41,6 +42,8 @@ public class PlayerManager : MonoBehaviour {
 		yield return null;
 		SetControlsActive(false);
 		TrackController.Instance.RideEnabled = false;
+
+		yield return new WaitForSeconds(RotateDelay);
 
 		float angle = 0;
 		while (angle < 360) {
