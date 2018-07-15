@@ -49,8 +49,8 @@ public class TrackController : MonoBehaviour {
 		curveParent = new GameObject("Curves").transform;
 		curveParent.parent = transform;
 
-		Vector3 next = Vector3.forward * 10;
-		curves.Add(new Curve(Vector3.back, Vector3.zero, next, next + newPointOffset()));
+		// Vector3 next = Vector3.forward * 10;
+		curves.Add(new Curve(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2));
 
 		for (int i = 0; i < NumberOfCurves; i++)
 			addNewCurve();
