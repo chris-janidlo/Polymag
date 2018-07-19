@@ -58,8 +58,8 @@ public class Curve {
 		Vector3 Q1 = (p1 - p0) / (t1 - t0) - (p2 - p0) / (t2 - t0) + (p2 - p1) / (t2 - t1);
 		Vector3 Q2 = (p2 - p1) / (t2 - t1) - (p3 - p1) / (t3 - t1) + (p3 - p2) / (t3 - t2);
 
-		Vector3 R1 = p1 + (t2 - t1) / 3 * Q1;
-		Vector3 R2 = p2 + (t2 - t1) / 3 * Q2;
+		Vector3 R1 = p1 + (t2 - t1) / 3f * Q1;
+		Vector3 R2 = p2 - (t2 - t1) / 3f * Q2;
 
 		float u = (t - t1) / (t2 - t1);
 
