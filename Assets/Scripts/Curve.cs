@@ -53,18 +53,15 @@ public class Curve {
 
 	// returns instantaneous derivative at time t on curve
 	// from https://math.stackexchange.com/a/848290/574705
-	// FIXME: seems to return the same velocity at all points
 	public Vector3 Velocity (float t) {
 		Vector3 Q1 = (p1 - p0) / (t1 - t0) - (p2 - p0) / (t2 - t0) + (p2 - p1) / (t2 - t1);
 		Vector3 Q2 = (p2 - p1) / (t2 - t1) - (p3 - p1) / (t3 - t1) + (p3 - p2) / (t3 - t2);
 
-		Vector3 R1 = p1 + (t2 - t1) / 3f * Q1;
-		Vector3 R2 = p2 - (t2 - t1) / 3f * Q2;
+		Vector3 R1 = p1 + Q1 * (t2 - t1) / 3f;
+		Vector3 R2 = p2 - Q2 * (t2 - t1) / 3f;
 
-		float u = (t - t1) / (t2 - t1);
-
-		Vector3 dC_du = 3*(Mathf.Pow(1-u, 2)*(R1-p1) + 2*u*(1-u)*(R2-R1) + Mathf.Pow(u, 2)*(p2-R2));
-		return dC_du / (t2 - t1);
+		Vector3 dC_dt = 3*(Mathf.Pow(1-t, 2)*(R1-p1) + 2*t*(1-t)*(R2-R1) + Mathf.Pow(t, 2)*(p2-R2));
+		return dC_dt / (t2 - t1);
 	}
 
 	float getT (float t, Vector3 p0, Vector3 p1) {

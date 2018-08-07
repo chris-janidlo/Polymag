@@ -53,7 +53,7 @@ public class TrackController : MonoBehaviour {
 		curveParent.parent = transform;
 
 		// Vector3 next = Vector3.forward * 10;
-		curves.Add(new Curve(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2, 0));
+		curves.Add(new Curve(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2));
 
 		for (int i = 0; i < NumberOfCurves; i++)
 			addNewCurve();
@@ -65,8 +65,12 @@ public class TrackController : MonoBehaviour {
 		Curve ridingCurve = curves[0];
 
 		Position = ridingCurve.Position(s);
+		Velocity = ridingCurve.Velocity(s);
 
-		s += Time.deltaTime;
+		// FIXME: speed is smooth, but not constant across segments of different length
+		s += Speed / Velocity.magnitude;
+
+		Speed = Mathf.Min(Speed + SpeedIncrease * Time.deltaTime, MaxSpeed);
 
 		if (s >= 1) {
 			s -= 1;
@@ -82,14 +86,8 @@ public class TrackController : MonoBehaviour {
 			Curve tmp = curves[0];
 		}
 
-		Speed = Mathf.Min(Speed + SpeedIncrease * Time.deltaTime, MaxSpeed);
-
 		Rider.transform.position = Position;
-		var look = (curves[0].Position(s) - Position).normalized;
-		if (look.z < 0) {
-			;
-		}
-		Rider.transform.rotation = Quaternion.LookRotation(look);
+		Rider.transform.rotation = Quaternion.LookRotation(Velocity.normalized);
 	}
 
 	Vector3 newPointOffset () {
@@ -101,7 +99,7 @@ public class TrackController : MonoBehaviour {
 
 	void addNewCurve () {
 		Curve prev = previous;
-		Curve next = new Curve(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset(), 0);
+		Curve next = new Curve(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset());
 
 		curves.Add(next);
 
