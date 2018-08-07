@@ -12,8 +12,7 @@ public class TrackController : MonoBehaviour {
 	public bool RideEnabled;
 
 	public float Speed;
-	public float SpeedIncrease;
-	public float MaxSpeed;
+	public float StartingS;
 
 	[Tooltip("Spawned at intervals along the line. Used by the player object to determine distance")]
 	public Collider CenterGameobject;
@@ -41,10 +40,12 @@ public class TrackController : MonoBehaviour {
 
 	Transform curveParent;
 
-	float s = 0;
+	float s;
 
 	void Start () {
 		Instance = this;
+
+		s = StartingS;
 
 		curves = new List<Curve>();
 		curveObjects = new List<GameObject>();
@@ -69,8 +70,6 @@ public class TrackController : MonoBehaviour {
 
 		// FIXME: speed is smooth, but not constant across segments of different length
 		s += Speed / Velocity.magnitude;
-
-		Speed = Mathf.Min(Speed + SpeedIncrease * Time.deltaTime, MaxSpeed);
 
 		if (s >= 1) {
 			s -= 1;
@@ -116,12 +115,12 @@ public class TrackController : MonoBehaviour {
 
 		for (int i = 0; i < samples.Length; i++) {
 
-			Vector3 point = samples[i];
+			Vector3 point = samples[i].Item1;
 
-			centerDirection += point - (i > 0 ? samples[i-1] : point);
+			centerDirection += point - (i > 0 ? samples[i-1].Item1 : point);
 
 			if (centerCycleCounter++ >= centerCycle) {
-				Instantiate(CenterGameobject, point, Quaternion.Euler(samples[i-1] - point)).transform.parent = parent.transform;
+				Instantiate(CenterGameobject, point, Quaternion.Euler(samples[i-1].Item1 - point)).transform.parent = parent.transform;
 				centerDirection = Vector3.zero;
 				centerCycleCounter = 0;
 			}
@@ -130,8 +129,8 @@ public class TrackController : MonoBehaviour {
 
 			float angle = 0;
 			foreach (var line in Lines) {
-				// note that circle doesn't rotate with the center line; it's always along the xy plane
-				Vector3 dot = point + Quaternion.AngleAxis(angle, Vector3.forward) * Vector3.right * LineDistance;
+				Vector3 dir = Vector3.Slerp(Vector3.forward, samples[i].Item2.normalized, .25f);
+				Vector3 dot = point + Quaternion.AngleAxis(angle, dir) * Vector3.right * LineDistance;
 				line.SetPosition(line.positionCount++, dot);
 
 				angle += 360f / Lines.Length;

@@ -42,11 +42,14 @@ public class Curve {
 		return C;
 	}
 
-	public Vector3[] Samples (int n) {
-		var samples = new Vector3[n];
+	// returns pairs of Position, Velocity n times along the curve
+	public System.Tuple<Vector3, Vector3>[] Samples (int n) {
+		var samples = new System.Tuple<Vector3, Vector3>[n];
 
-		for (int i = 0; i < n; i++)
-			samples[i] = Position(i * (1.0f / n));
+		for (int i = 0; i < n; i++) {
+			float t = i * (1.0f / n);
+			samples[i] = new System.Tuple<Vector3, Vector3>(Position(t), Velocity(t));
+		}
 		
 		return samples;
 	}

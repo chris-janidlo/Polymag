@@ -6,22 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour {
 
-	public static PlayerManager Instance;
-
 	public Transform CameraRotator;
 	public Text CenterText;
 	public Camera CameraT;
 	public GameObject PlayerVisual;
-	public bool Started;
 
-	public float RotationTime = 1;
-	public float RotateDelay;
-	public float EvilDelay;
+	public float StartDelay;
 
 	public bool Dead { get; private set; }
 
 	void Start () {
-		Instance = this;
 		StartCoroutine(startRoutine());
 	}
 	
@@ -40,23 +34,12 @@ public class PlayerManager : MonoBehaviour {
 	}
 
 	IEnumerator startRoutine () {
-		Started = false;
-
 		yield return null;
 		SetControlsActive(false);
 		TrackController.Instance.RideEnabled = false;
 
-		yield return new WaitForSeconds(RotateDelay);
-
-		float angle = 0;
-		while (angle < 360) {
-			CameraRotator.rotation = Quaternion.AngleAxis(angle, Vector3.up);
-			angle += Time.deltaTime * (360 / RotationTime);
-			yield return null;
-		}
-		CameraRotator.rotation = Quaternion.identity;
-
-		yield return new WaitForSeconds(1);
+		CenterText.text = "Catch the Energy Crystal";
+		yield return new WaitForSeconds(StartDelay);
 
 		CenterText.text = "3";
 		yield return new WaitForSeconds(1);
@@ -69,12 +52,10 @@ public class PlayerManager : MonoBehaviour {
 
 		CenterText.text = "go";
 		SetControlsActive(true);
-		Started = true;
+		TrackController.Instance.RideEnabled = true;
+
 		yield return new WaitForSeconds(1);
 		CenterText.text = "";
-
-		yield return new WaitForSeconds(EvilDelay);
-		TrackController.Instance.RideEnabled = true;
 	}
 
 	IEnumerator endRoutine () {
@@ -92,7 +73,7 @@ public class PlayerManager : MonoBehaviour {
 		Destroy(PlayerVisual);
 
 		yield return new WaitForSeconds(1);
-		CenterText.text = "game over";
+		CenterText.text = "It got away...";
 
 		yield return new WaitForSeconds(3.7f);
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("main");
