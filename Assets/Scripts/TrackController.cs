@@ -32,6 +32,7 @@ public class TrackController : Singleton<TrackController> {
 
 	void Start () {
 		Instance = this;
+		SingletonAllowReset();
 
 		curves = new List<Curve>();
 		curveObjects = new List<GameObject>();

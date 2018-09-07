@@ -16,6 +16,7 @@ public class CrystalManager : Singleton<CrystalManager> {
 
 	void Start () {
 		Instance = this;
+		SingletonAllowReset();
 	}
 
 	public void SpawnFirstCrystal () {

@@ -15,8 +15,17 @@ public class PlayerManager : MonoBehaviour {
 
 	public bool Dead { get; private set; }
 
+	bool quitting;
+
 	void Start () {
 		StartCoroutine(startRoutine());
+	}
+
+	void Update () {
+		if (!quitting && Input.GetButton("Quit Game")) {
+			quitting = true;
+			StartCoroutine(quit());
+		}
 	}
 	
 	void OnTriggerEnter (Collider other) {
@@ -75,6 +84,10 @@ public class PlayerManager : MonoBehaviour {
 		CenterText.text = "It got away...";
 
 		yield return new WaitForSeconds(3.7f);
+		StartCoroutine(quit()); // untested
+	}
+
+	IEnumerator quit () {
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("main");
 		yield return new WaitUntil(() => asyncLoad.isDone);
 	}
