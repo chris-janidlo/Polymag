@@ -484,7 +484,7 @@ MonoBehaviour:
     type: 2}
   FirstSpawnDistance: 2
   NewSpawnDelay: 2
-  NewSpawnDistanceRange: {x: 0.2, y: 1.5}
+  NewSpawnDistanceRange: {x: 1, y: 2}
 --- !u!4 &862307675
 Transform:
   m_ObjectHideFlags: 0
