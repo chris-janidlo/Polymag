@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour {
 		yield return null;
 		SetControlsActive(false);
 
-		CenterText.text = "Catch the Energy Crystal";
+		CenterText.text = "Catch the Power Crystal";
 		yield return new WaitForSeconds(StartDelay);
 
 		CenterText.text = "3";
