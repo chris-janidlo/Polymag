@@ -129,7 +129,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1132401655793598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9395.407, y: 2567.351, z: 2992.0596}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4147354172594794}
@@ -432,10 +432,7 @@ MonoBehaviour:
   CenterText: {fileID: 0}
   CameraT: {fileID: 20895981338588246}
   PlayerVisual: {fileID: 0}
-  Started: 0
-  RotationTime: 4
-  RotateDelay: 0.3
-  EvilDelay: 2
+  StartDelay: 3
 --- !u!114 &114938381621089256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,8 +463,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 1}
+  m_Radius: 2.15
+  m_Center: {x: 0, y: 0.36, z: 0.69}
 --- !u!198 &198001806641183322
 ParticleSystem:
   m_ObjectHideFlags: 1

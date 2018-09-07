@@ -1,18 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using crass;
 
-
-public class TrackController : MonoBehaviour {
+public class TrackController : Singleton<TrackController> {
 
 	[Tooltip("The total number of segments making up the overall line. Changing this value after the script is loaded has no effect")]
 	public int NumberOfCurves;
-
-	public GameObject Rider;
-	public bool RideEnabled;
-
-	public float Speed;
-	public float StartingS;
 
 	[Tooltip("Spawned at intervals along the line. Used by the player object to determine distance")]
 	public Collider CenterGameobject;
@@ -26,15 +20,9 @@ public class TrackController : MonoBehaviour {
 	[Tooltip("Resolution of each line")]
 	public int DotsPerLine = 20;
 	public int CenterObjectsPerLine = 5;
-	
-	public static TrackController Instance;
-
-	public Vector3 Position { get; private set; }
-	public Vector3 Velocity { get; private set; }
 
 	List<Curve> curves;
 	List<GameObject> curveObjects;
-	int curveCount = 0;
 
 	Curve previous { get { return curves[curves.Count - 1]; } }
 
@@ -44,8 +32,6 @@ public class TrackController : MonoBehaviour {
 
 	void Start () {
 		Instance = this;
-
-		s = StartingS;
 
 		curves = new List<Curve>();
 		curveObjects = new List<GameObject>();
@@ -60,37 +46,23 @@ public class TrackController : MonoBehaviour {
 			addNewCurve();
 	}
 
-	void Update () {
-		if (!RideEnabled) return;
+	public Vector3 GetPositionAt (float s) {
+		return getCurveAt(s).Position(s % 1);
+	}
 
-		Curve ridingCurve = curves[0];
+	public Vector3 GetVelocityAt (float s) {
+		return getCurveAt(s).Velocity(s % 1);
+	}
 
-		Position = ridingCurve.Position(s);
-		Velocity = ridingCurve.Velocity(s);
+	Curve getCurveAt (float s) {
+		int index = Mathf.FloorToInt(s);
+		if (index > curves.Count / 2) addNewCurve();
 
-		// FIXME: speed is smooth, but not constant across segments of different length
-		s += Speed / Velocity.magnitude;
-
-		if (s >= 1) {
-			s -= 1;
-
-			addNewCurve();
-			
-			curves.RemoveAt(0);
-			Destroy(curveObjects[0], 10);
-			curveObjects.RemoveAt(0);
-
-			// FIXME: remove line renderer parts for old curve
-
-			Curve tmp = curves[0];
-		}
-
-		Rider.transform.position = Position;
-		Rider.transform.rotation = Quaternion.LookRotation(Velocity.normalized);
+		return curves[index];
 	}
 
 	Vector3 newPointOffset () {
-		Vector2 xy = Random.insideUnitCircle * (60 + curveCount / 2.0f);
+		Vector2 xy = Random.insideUnitCircle * (60 + curves.Count / 2.0f);
 		float z = Random.Range(30, 50);
 
 		return new Vector3(xy.x, xy.y, z);
@@ -102,7 +74,7 @@ public class TrackController : MonoBehaviour {
 
 		curves.Add(next);
 
-		var parent = new GameObject("Curve " + curveCount++);
+		var parent = new GameObject("Curve " + curves.Count);
 		parent.transform.parent = curveParent;
 		curveObjects.Add(parent);
 

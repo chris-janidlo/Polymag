@@ -36,7 +36,6 @@ public class PlayerManager : MonoBehaviour {
 	IEnumerator startRoutine () {
 		yield return null;
 		SetControlsActive(false);
-		TrackController.Instance.RideEnabled = false;
 
 		CenterText.text = "Catch the Energy Crystal";
 		yield return new WaitForSeconds(StartDelay);
@@ -52,7 +51,7 @@ public class PlayerManager : MonoBehaviour {
 
 		CenterText.text = "go";
 		SetControlsActive(true);
-		TrackController.Instance.RideEnabled = true;
+		CrystalManager.Instance.SpawnFirstCrystal();
 
 		yield return new WaitForSeconds(1);
 		CenterText.text = "";
