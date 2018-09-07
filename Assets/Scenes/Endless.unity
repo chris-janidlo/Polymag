@@ -482,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CrystalPrefab: {fileID: 114101288050187216, guid: 9df6523c5b89841dca286205da2cd5d7,
     type: 2}
-  FirstSpawnDistance: 3
+  FirstSpawnDistance: 2
   NewSpawnDelay: 2
   NewSpawnDistanceRange: {x: 0.2, y: 1.5}
 --- !u!4 &862307675
@@ -606,7 +606,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4052327040371980, guid: 735db8ed2d4104c398c3451cb677303d, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 4052327040371980, guid: 735db8ed2d4104c398c3451cb677303d, type: 2}
       propertyPath: m_LocalRotation.x
