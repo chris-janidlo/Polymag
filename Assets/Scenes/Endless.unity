@@ -646,7 +646,7 @@ Prefab:
     - target: {fileID: 114005474506727728, guid: 735db8ed2d4104c398c3451cb677303d,
         type: 2}
       propertyPath: TurnSpeed
-      value: 1.7
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735db8ed2d4104c398c3451cb677303d, type: 2}
