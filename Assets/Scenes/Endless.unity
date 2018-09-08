@@ -633,6 +633,16 @@ Prefab:
       propertyPath: CenterText
       value: 
       objectReference: {fileID: 655021223}
+    - target: {fileID: 114740522870437376, guid: 735db8ed2d4104c398c3451cb677303d,
+        type: 2}
+      propertyPath: Thrust
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114687204479574522, guid: 735db8ed2d4104c398c3451cb677303d,
+        type: 2}
+      propertyPath: Thrust
+      value: 23
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735db8ed2d4104c398c3451cb677303d, type: 2}
   m_IsPrefabParent: 0
