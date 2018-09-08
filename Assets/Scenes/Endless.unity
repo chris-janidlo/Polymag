@@ -641,7 +641,12 @@ Prefab:
     - target: {fileID: 114687204479574522, guid: 735db8ed2d4104c398c3451cb677303d,
         type: 2}
       propertyPath: Thrust
-      value: 23
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114005474506727728, guid: 735db8ed2d4104c398c3451cb677303d,
+        type: 2}
+      propertyPath: TurnSpeed
+      value: 1.7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 735db8ed2d4104c398c3451cb677303d, type: 2}
