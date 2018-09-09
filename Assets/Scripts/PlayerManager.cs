@@ -58,7 +58,7 @@ public class PlayerManager : MonoBehaviour {
 		CenterText.text = "1";
 		yield return new WaitForSeconds(1);
 
-		CenterText.text = "go";
+		CenterText.text = "GO";
 		SetControlsActive(true);
 		CrystalManager.Instance.SpawnFirstCrystal();
 

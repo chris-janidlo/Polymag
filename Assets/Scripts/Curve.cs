@@ -67,6 +67,15 @@ public class Curve {
 		return dC_dt / (t2 - t1);
 	}
 
+	public float ClosestDistanceToPoint (Vector3 point, int samples = 41) {
+		float smallestDist = float.MaxValue;
+		foreach (var sample in Samples(samples)) {
+			float dist = Vector3.Distance(point, sample.Item1);
+			smallestDist = Mathf.Min(smallestDist, dist);
+		}
+		return smallestDist;
+	}
+
 	float getT (float t, Vector3 p0, Vector3 p1) {
 	    float a = Mathf.Pow((p1.x-p0.x), 2.0f) + Mathf.Pow((p1.y-p0.y), 2.0f) + Mathf.Pow((p1.z-p0.z), 2.0f);
 	    float b = Mathf.Pow(a, 0.5f);

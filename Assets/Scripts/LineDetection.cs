@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class LineDetection : MonoBehaviour {
 
-	public float OffroadDrag = 1;
-	public float Tolerance = 0.01f;
-	
-	bool offroad;
+	[Tooltip("Graph where x = shortest distance between the player and the track center, and y = the associated drag.")]
+	public AnimationCurve DragByDistanceToCurve;
 
 	int layerMask = 1 << 8;
 	Rigidbody rb;
@@ -17,16 +15,8 @@ public class LineDetection : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!Physics.CheckSphere(transform.position, Tolerance, layerMask, QueryTriggerInteraction.Collide)) {
-			if (!offroad) {
-				rb.drag = OffroadDrag;
-				offroad = true;
-			}
-		}
-		else if (offroad) {
-			rb.drag = 0;
-			offroad = false;
-		}
+		float dist = TrackController.Instance.DistanceFromCurve(transform.position);
+		rb.drag = DragByDistanceToCurve.Evaluate(dist);
 	}
 
 }

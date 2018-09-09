@@ -8,8 +8,11 @@ public class TrackController : Singleton<TrackController> {
 	[Tooltip("The total number of segments making up the overall line. Changing this value after the script is loaded has no effect")]
 	public int NumberOfCurves;
 
-	[Tooltip("Spawned at intervals along the line. Used by the player object to determine distance")]
-	public Collider CenterGameobject;
+	[Tooltip("Spawned at intervals along the line")]
+	public GameObject CenterGameObject;
+
+	[Tooltip("When the player enters this, they have entered the curve segment.")]
+	public LineGate LineGate;
 
 	public LineRenderer CenterLine;
 
@@ -25,6 +28,8 @@ public class TrackController : Singleton<TrackController> {
 	List<GameObject> curveObjects;
 
 	Curve previous { get { return curves[curves.Count - 1]; } }
+
+	Curve currentPlayerCurve;
 
 	Transform curveParent;
 
@@ -43,6 +48,8 @@ public class TrackController : Singleton<TrackController> {
 		// Vector3 next = Vector3.forward * 10;
 		curves.Add(new Curve(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2));
 
+		currentPlayerCurve = curves[0];
+
 		for (int i = 0; i < NumberOfCurves; i++)
 			addNewCurve();
 	}
@@ -53,6 +60,15 @@ public class TrackController : Singleton<TrackController> {
 
 	public Vector3 GetVelocityAt (float s) {
 		return getCurveAt(s).Velocity(s % 1);
+	}
+
+	public float DistanceFromCurve (Vector3 point) {
+		return currentPlayerCurve.ClosestDistanceToPoint(point);
+	}
+
+	void onGateCollision (Curve toSet) {
+		Debug.Log("Player is in new curve");
+		currentPlayerCurve = toSet;
 	}
 
 	Curve getCurveAt (float s) {
@@ -90,10 +106,18 @@ public class TrackController : Singleton<TrackController> {
 
 			Vector3 point = samples[i].Item1;
 
+			bool start = i == 0, end = i == samples.Length-1;
+			if (start || end) {
+				var offset = (start ? Vector3.forward : Vector3.back) * 0.25f;
+				var g = Instantiate(LineGate, point + offset, Quaternion.identity);
+				g.transform.parent = parent.transform;
+				g.GetComponent<LineGate>().Initialize(next, onGateCollision);
+			}
+
 			centerDirection += point - (i > 0 ? samples[i-1].Item1 : point);
 
 			if (centerCycleCounter++ >= centerCycle) {
-				Instantiate(CenterGameobject, point, Quaternion.Euler(samples[i-1].Item1 - point)).transform.parent = parent.transform;
+				Instantiate(CenterGameObject, point, Quaternion.Euler(samples[i-1].Item1 - point)).transform.parent = parent.transform;
 				centerDirection = Vector3.zero;
 				centerCycleCounter = 0;
 			}
