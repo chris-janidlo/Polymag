@@ -67,7 +67,6 @@ public class TrackController : Singleton<TrackController> {
 	}
 
 	void onGateCollision (Curve toSet) {
-		Debug.Log("Player is in new curve");
 		currentPlayerCurve = toSet;
 	}
 
