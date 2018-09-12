@@ -9555,7 +9555,7 @@ MonoBehaviour:
       outWeight: 0.31563294
     - serializedVersion: 3
       time: 15
-      value: 2
+      value: 5
       inSlope: 0.37049136
       outSlope: 1
       tangentMode: 1
@@ -14777,9 +14777,13 @@ MonoBehaviour:
   MaxFuel: 100
   LossPerSecond: 2
   GainPerCrystal: 30
+  DangerFlashes: 4
+  DangerFlashRate: 0.7
   AmountImage: {fileID: 1537845402}
   BackgroundImage: {fileID: 2092737559}
   AmountLerp: 0.8
+  BackgroundNeutral: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
+  BackgroundDanger: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
   PickUpScale: 1.15
   PickUpTime: 1
 --- !u!1 &2098914219

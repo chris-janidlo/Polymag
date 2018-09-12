@@ -7,20 +7,28 @@ using crass;
 public class FuelTank : Singleton<FuelTank> {
 
 	public float Fuel, MaxFuel, LossPerSecond, GainPerCrystal;
+	
+	public int DangerFlashes;
+	public float DangerFlashRate;
 
 	public Image AmountImage, BackgroundImage;
 	public float AmountLerp;
+
+	public Color BackgroundNeutral, BackgroundDanger;
 
 	public float PickUpScale, PickUpTime;
 
 	Vector3 origScale;
 
+	bool inDanger;
+	float dangerTimer, dangerFlashTimer;
+
 	void Start () {
-		Instance = this;
-		SingletonAllowReset();
+		SingletonSetInstance(this, true);
 
 		Fuel = MaxFuel;
 		origScale = transform.localScale;
+		BackgroundNeutral = BackgroundImage.color;
 	}
 	
 	void Update () {
@@ -30,6 +38,33 @@ public class FuelTank : Singleton<FuelTank> {
 		}
 		
 		AmountImage.fillAmount = Mathf.Lerp(AmountImage.fillAmount, Fuel / MaxFuel, AmountLerp);
+
+		if (Fuel == 0 && !inDanger) {
+			inDanger = true;
+			dangerTimer = DangerFlashes * DangerFlashRate;
+		}
+		if (Fuel != 0 && inDanger) {
+			inDanger = false;
+		}
+
+		if (inDanger) {
+			if (BackgroundImage.color == BackgroundNeutral) {
+				dangerFlashTimer = DangerFlashRate;
+				BackgroundImage.color = BackgroundDanger;
+			}
+			else {
+				BackgroundImage.color = Color.Lerp(BackgroundNeutral, BackgroundDanger, dangerFlashTimer / DangerFlashRate);
+				dangerFlashTimer -= Time.deltaTime;
+			}
+
+			dangerTimer -= Time.deltaTime;
+			if (dangerTimer <= 0) {
+				Debug.Log("dead");
+			}
+		}
+		else {
+			BackgroundImage.color = BackgroundNeutral;
+		}
 	}
 
 	public void PickUpCrystal () {
