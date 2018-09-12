@@ -74,16 +74,19 @@ public class Crystal : MonoBehaviour {
 		dead = true;
 
 		transform.parent = GameObject.Find("Canvas").transform;
+		gameObject.layer = 5; // UI layer. TODO: can we get the crystal on top of the UI when it's dead?
 		
-		Transform target = CrystalManager.Instance.DeathTarget;
+		RectTransform target = CrystalManager.Instance.DeathTarget;
 		Vector3 velocity = Vector3.zero;
+		
+		var mc = CameraCache.Main;
 
-		while (Vector3.Distance(transform.position, target.position) > 1) {
-			transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, DeathFlyTime);
+		while (!RectTransformUtility.RectangleContainsScreenPoint(target, mc.WorldToScreenPoint(transform.position), mc)) {
+			transform.localPosition = Vector3.SmoothDamp(transform.localPosition, target.localPosition, ref velocity, DeathFlyTime);
 			yield return null;
 		}
 
-		// TODO: increase fuel
+		FuelTank.Instance.PickUpCrystal();
 
 		Destroy(gameObject);
 	}

@@ -13,7 +13,7 @@ public class CrystalManager : Singleton<CrystalManager> {
 	public Vector2 NewSpawnDistanceRange;
 
 	[Tooltip("On being caught, crystals will travel to this target.")]
-	public Transform DeathTarget;
+	public RectTransform DeathTarget;
 
 	Crystal currentCrystal;
 

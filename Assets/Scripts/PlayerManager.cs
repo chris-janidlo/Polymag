@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using crass;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : Singleton<PlayerManager> {
 
 	public Transform CameraRotator;
 	public Text CenterText;
@@ -15,11 +16,15 @@ public class PlayerManager : MonoBehaviour {
 
 	public bool SkipIntro = true;
 
+	public bool Started { get; private set; }
 	public bool Dead { get; private set; }
 
 	bool quitting;
 
 	void Start () {
+		Instance = this;
+		SingletonAllowReset();
+		
 		StartCoroutine(startRoutine());
 	}
 
@@ -46,7 +51,7 @@ public class PlayerManager : MonoBehaviour {
 
 	IEnumerator startRoutine () {
 		yield return null;
-		
+
 #if !UNITY_EDITOR
 		SkipIntro = false;
 #endif
@@ -69,6 +74,8 @@ public class PlayerManager : MonoBehaviour {
 			CenterText.text = "GO";
 			SetControlsActive(true);
 		}
+
+		Started = true;
 
 		CrystalManager.Instance.SpawnFirstCrystal();
 
