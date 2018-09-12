@@ -59,7 +59,7 @@ public class FuelTank : Singleton<FuelTank> {
 
 			dangerTimer -= Time.deltaTime;
 			if (dangerTimer <= 0) {
-				Debug.Log("dead");
+				PlayerManager.Instance.GameOver();
 			}
 		}
 		else {
