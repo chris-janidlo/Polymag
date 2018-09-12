@@ -22,8 +22,7 @@ public class PlayerManager : Singleton<PlayerManager> {
 	bool quitting;
 
 	void Start () {
-		Instance = this;
-		SingletonAllowReset();
+		SingletonSetInstance(this, true);		
 		
 		StartCoroutine(startRoutine());
 	}

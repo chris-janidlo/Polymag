@@ -36,8 +36,7 @@ public class TrackController : Singleton<TrackController> {
 	float s;
 
 	void Start () {
-		Instance = this;
-		SingletonAllowReset();
+		SingletonSetInstance(this, true);		
 
 		curves = new List<Curve>();
 		curveObjects = new List<GameObject>();
