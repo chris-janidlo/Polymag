@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4638137998706898}
-  - component: {fileID: 64365146987942706}
+  - component: {fileID: 135439664832494862}
   - component: {fileID: 114101288050187216}
   m_Layer: 0
   m_Name: Crystal
@@ -115,20 +115,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1184772965875248}
   m_Mesh: {fileID: 4300000, guid: d615a0c26b17a44b8a0824d9cc47bd76, type: 3}
---- !u!64 &64365146987942706
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1800110249351060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: d615a0c26b17a44b8a0824d9cc47bd76, type: 3}
 --- !u!95 &95959351433730814
 Animator:
   serializedVersion: 3
@@ -158,5 +144,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05a8d9aa13af24c409a45d07ce4cffcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.056
+  Speed: 0.04
   ValueAlongCurve: 0
+  RotationAxis: {x: 0, y: 1, z: 0.001}
+  RotationRate: 37
+  SpawnBubbleTime: 0.3
+  SpawnBubbleScale: 1.2
+  DeathFlyTime: 1
+--- !u!135 &135439664832494862
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1800110249351060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.82
+  m_Center: {x: 0, y: 0, z: 0}

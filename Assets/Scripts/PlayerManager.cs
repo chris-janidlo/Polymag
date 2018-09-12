@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour {
 
 	public float StartDelay;
 
+	public bool SkipIntro = true;
+
 	public bool Dead { get; private set; }
 
 	bool quitting;
@@ -44,22 +46,30 @@ public class PlayerManager : MonoBehaviour {
 
 	IEnumerator startRoutine () {
 		yield return null;
-		SetControlsActive(false);
+		
+#if !UNITY_EDITOR
+		SkipIntro = false;
+#endif
 
-		CenterText.text = "Catch the Power Crystal";
-		yield return new WaitForSeconds(StartDelay);
+		if (!SkipIntro) {
+			SetControlsActive(false);
 
-		CenterText.text = "3";
-		yield return new WaitForSeconds(1);
+			CenterText.text = "Catch the Power Crystal";
+			yield return new WaitForSeconds(StartDelay);
 
-		CenterText.text = "2";
-		yield return new WaitForSeconds(1);
+			CenterText.text = "3";
+			yield return new WaitForSeconds(1);
 
-		CenterText.text = "1";
-		yield return new WaitForSeconds(1);
+			CenterText.text = "2";
+			yield return new WaitForSeconds(1);
 
-		CenterText.text = "GO";
-		SetControlsActive(true);
+			CenterText.text = "1";
+			yield return new WaitForSeconds(1);
+
+			CenterText.text = "GO";
+			SetControlsActive(true);
+		}
+
 		CrystalManager.Instance.SpawnFirstCrystal();
 
 		yield return new WaitForSeconds(1);
