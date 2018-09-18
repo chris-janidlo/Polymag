@@ -100,7 +100,7 @@ public class PlayerManager : Singleton<PlayerManager> {
 		Instantiate(DeathEffect, transform.position, Quaternion.identity);
 
 		yield return new WaitForSeconds(1);
-		CenterText.text = "These ships don't work in space unless you've got POWER";
+		CenterText.text = "You're Dead!";
 
 		yield return new WaitForSeconds(3.7f);
 		StartCoroutine(quit());
