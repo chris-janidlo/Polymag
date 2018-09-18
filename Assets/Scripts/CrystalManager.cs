@@ -35,7 +35,7 @@ public class CrystalManager : Singleton<CrystalManager> {
 	}
 
 	void spawnCrystal (float distance) {
-		var position = TrackController.Instance.GetPositionAt(distance);
+		var position = Track.Instance.GetPositionAt(distance);
 
 		currentCrystal = Instantiate(CrystalPrefab, position, Quaternion.identity);
 		currentCrystal.Initialize(distance);

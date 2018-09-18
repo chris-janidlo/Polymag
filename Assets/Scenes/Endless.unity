@@ -919,7 +919,7 @@ GameObject:
   - component: {fileID: 209571095}
   - component: {fileID: 209571094}
   m_Layer: 0
-  m_Name: TrackController
+  m_Name: Track
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

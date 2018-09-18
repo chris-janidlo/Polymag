@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class LineGate : MonoBehaviour {
 
-	event System.Action<Curve> collisionEvent;
-	Curve associatedCurve;
+	event System.Action<CurveSegment> collisionEvent;
+	CurveSegment associatedCurve;
 
-	public void Initialize (Curve associatedCurve, System.Action<Curve> onCollision) {
+	public void Initialize (CurveSegment associatedCurve, System.Action<CurveSegment> onCollision) {
 		this.associatedCurve = associatedCurve;
 		collisionEvent += onCollision;
 	}

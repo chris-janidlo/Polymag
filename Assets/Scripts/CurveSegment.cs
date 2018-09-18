@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // major credit to this article https://en.wikipedia.org/wiki/Centripetal_Catmull%E2%80%93Rom_spline for giving a full implementation in Unity
-public class Curve {
+public class CurveSegment {
 	
 	// set from 0-1
 	public float Alpha;
@@ -12,7 +12,7 @@ public class Curve {
 
 	float t0, t1, t2, t3;
 	
-	public Curve (Vector3 previous, Vector3 current, Vector3 next, Vector3 future, float alpha = 0.5f) {
+	public CurveSegment (Vector3 previous, Vector3 current, Vector3 next, Vector3 future, float alpha = 0.5f) {
 		Alpha = alpha;
 
 		p0 = previous;

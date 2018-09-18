@@ -27,8 +27,8 @@ public class Crystal : MonoBehaviour {
 			transform.Rotate(RotationAxis, RotationRate * Time.deltaTime);
 		}
 
-		var position = TrackController.Instance.GetPositionAt(ValueAlongCurve);
-		var velocity = TrackController.Instance.GetVelocityAt(ValueAlongCurve);
+		var position = Track.Instance.GetPositionAt(ValueAlongCurve);
+		var velocity = Track.Instance.GetVelocityAt(ValueAlongCurve);
 
 		// FIXME: speed is smooth, but not constant across segments of different length
 		ValueAlongCurve += Speed / velocity.magnitude;

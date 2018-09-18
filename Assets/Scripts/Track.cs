@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using crass;
 
-public class TrackController : Singleton<TrackController> {
+public class Track : Singleton<Track> {
 
 	[Tooltip("The total number of segments making up the overall line. Changing this value after the script is loaded has no effect")]
 	public int NumberOfCurves;
@@ -24,12 +24,12 @@ public class TrackController : Singleton<TrackController> {
 	public int DotsPerLine = 20;
 	public int CenterObjectsPerLine = 5;
 
-	List<Curve> curves;
+	List<CurveSegment> curves;
 	List<GameObject> curveObjects;
 
-	Curve previous { get { return curves[curves.Count - 1]; } }
+	CurveSegment previous { get { return curves[curves.Count - 1]; } }
 
-	Curve currentPlayerCurve;
+	CurveSegment currentPlayerCurve;
 
 	Transform curveParent;
 
@@ -38,14 +38,14 @@ public class TrackController : Singleton<TrackController> {
 	void Start () {
 		SingletonSetInstance(this, true);		
 
-		curves = new List<Curve>();
+		curves = new List<CurveSegment>();
 		curveObjects = new List<GameObject>();
 
 		curveParent = new GameObject("Curves").transform;
 		curveParent.parent = transform;
 
 		// Vector3 next = Vector3.forward * 10;
-		curves.Add(new Curve(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2));
+		curves.Add(new CurveSegment(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2));
 
 		currentPlayerCurve = curves[0];
 
@@ -65,11 +65,11 @@ public class TrackController : Singleton<TrackController> {
 		return currentPlayerCurve.ClosestDistanceToPoint(point);
 	}
 
-	void onGateCollision (Curve toSet) {
+	void onGateCollision (CurveSegment toSet) {
 		currentPlayerCurve = toSet;
 	}
 
-	Curve getCurveAt (float s) {
+	CurveSegment getCurveAt (float s) {
 		int index = Mathf.FloorToInt(s);
 		if (index > curves.Count / 2) addNewCurve();
 
@@ -84,8 +84,8 @@ public class TrackController : Singleton<TrackController> {
 	}
 
 	void addNewCurve () {
-		Curve prev = previous;
-		Curve next = new Curve(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset());
+		CurveSegment prev = previous;
+		CurveSegment next = new CurveSegment(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset());
 
 		curves.Add(next);
 
