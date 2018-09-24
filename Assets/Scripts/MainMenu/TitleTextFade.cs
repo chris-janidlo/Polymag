@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitleTextFade : MonoBehaviour {
-
+public class TitleTextFade : MonoBehaviour 
+{
 	public float TransitionTime;
 
 	private Text text;
 
-	void Start () {
+	void Start () 
+	{
 		text = GetComponent<Text>();
 		text.canvasRenderer.SetAlpha(1);
 	}
 	
-	void Update () {
+	void Update () 
+	{
 		if (text.canvasRenderer.GetColor().a == 0)
 			text.CrossFadeAlpha(.99f, TransitionTime, true);
 		if (text.canvasRenderer.GetColor().a == .99f)

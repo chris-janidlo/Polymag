@@ -4,8 +4,8 @@ using UnityEngine;
 using crass;
 
 [RequireComponent(typeof(Collider))]
-public class Crystal : MonoBehaviour {
-
+public class Crystal : MonoBehaviour
+{
 	public float Speed;
 
 	public float ValueAlongCurve;
@@ -20,10 +20,12 @@ public class Crystal : MonoBehaviour {
 
 	bool dead, doneSpawning;
 
-	void Update () {
+	void Update ()
+	{
 		if (dead) return;
 
-		if (doneSpawning) {
+		if (doneSpawning)
+		{
 			transform.Rotate(RotationAxis, RotationRate * Time.deltaTime);
 		}
 
@@ -36,23 +38,27 @@ public class Crystal : MonoBehaviour {
 		transform.position = position;
 	}
 
-	public void Initialize (float s) {
+	public void Initialize (float s)
+	{
 		StartCoroutine(birthSequence());
 		ValueAlongCurve = s;
 	}
 
-	void OnTriggerEnter (Collider other) {
+	void OnTriggerEnter (Collider other)
+	{
 		StartCoroutine(deathSequence());
 		Caught?.Invoke(ValueAlongCurve);
 	}
 
-	IEnumerator birthSequence () {
+	IEnumerator birthSequence ()
+	{
 		Vector3 target = transform.localScale * SpawnBubbleScale, velocity = Vector3.zero, oldScale = transform.localScale;
 		float timer = SpawnBubbleTime;
 
 		transform.localScale /= 2;
 
-		while (timer >= 0) {
+		while (timer >= 0)
+		{
 			transform.localScale = Vector3.Lerp(transform.localScale, target, .25f);
 
 			timer -= Time.deltaTime;
@@ -61,7 +67,8 @@ public class Crystal : MonoBehaviour {
 		doneSpawning = true;
 
 		timer = SpawnBubbleTime;
-		while (timer >= 0) {
+		while (timer >= 0)
+		{
 			transform.localScale = Vector3.SmoothDamp(transform.localScale, oldScale, ref velocity, SpawnBubbleTime);
 
 			timer -= Time.deltaTime;
@@ -69,7 +76,8 @@ public class Crystal : MonoBehaviour {
 		}
 	}
 
-	IEnumerator deathSequence () {
+	IEnumerator deathSequence ()
+	{
 		GetComponent<Collider>().enabled = false;
 		dead = true;
 
@@ -81,7 +89,8 @@ public class Crystal : MonoBehaviour {
 		
 		var mc = CameraCache.Main;
 
-		while (!RectTransformUtility.RectangleContainsScreenPoint(target, mc.WorldToScreenPoint(transform.position), mc)) {
+		while (!RectTransformUtility.RectangleContainsScreenPoint(target, mc.WorldToScreenPoint(transform.position), mc))
+		{
 			transform.localPosition = Vector3.SmoothDamp(transform.localPosition, target.localPosition, ref velocity, DeathFlyTime);
 			yield return null;
 		}

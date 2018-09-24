@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using crass;
 
-public class CrystalManager : Singleton<CrystalManager> {
-
+public class CrystalManager : Singleton<CrystalManager>
+{
 	public Crystal CrystalPrefab;
 
 	public float FirstSpawnDistance;
@@ -17,24 +17,28 @@ public class CrystalManager : Singleton<CrystalManager> {
 
 	Crystal currentCrystal;
 
-	void Start () {
+	void Start ()
+	{
 		SingletonSetInstance(this, true);
 	}
 
-	public void SpawnFirstCrystal () {
+	public void SpawnFirstCrystal ()
+	{
 		if (currentCrystal != null) throw new System.Exception("Should not be calling this twice");
 
 		spawnCrystal(FirstSpawnDistance);
 	}
 
-	IEnumerator spawnNewCrystal (float oldDistance) {
+	IEnumerator spawnNewCrystal (float oldDistance)
+	{
 		yield return new WaitForSeconds(NewSpawnDelay);
 
 		float newDistance = oldDistance + Random.Range(NewSpawnDistanceRange.x, NewSpawnDistanceRange.y);
 		spawnCrystal(newDistance);
 	}
 
-	void spawnCrystal (float distance) {
+	void spawnCrystal (float distance)
+	{
 		var position = Track.Instance.GetPositionAt(distance);
 
 		currentCrystal = Instantiate(CrystalPrefab, position, Quaternion.identity);
@@ -43,7 +47,8 @@ public class CrystalManager : Singleton<CrystalManager> {
 		currentCrystal.Caught += OnCurrentCrystalCaught;
 	}
 
-	void OnCurrentCrystalCaught (float distance) {
+	void OnCurrentCrystalCaught (float distance)
+	{
 		currentCrystal.Caught -= OnCurrentCrystalCaught;
 		StartCoroutine(spawnNewCrystal(distance));
 	}

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using crass;
 
-public class Track : Singleton<Track> {
-
+public class Track : Singleton<Track>
+{
 	[Tooltip("The total number of segments making up the overall line. Changing this value after the script is loaded has no effect")]
 	public int NumberOfCurves;
 
@@ -35,7 +35,8 @@ public class Track : Singleton<Track> {
 
 	float s;
 
-	void Start () {
+	void Start ()
+	{
 		SingletonSetInstance(this, true);		
 
 		curves = new List<CurveSegment>();
@@ -53,37 +54,44 @@ public class Track : Singleton<Track> {
 			addNewCurve();
 	}
 
-	public Vector3 GetPositionAt (float s) {
+	public Vector3 GetPositionAt (float s)
+	{
 		return getCurveAt(s).Position(s % 1);
 	}
 
-	public Vector3 GetVelocityAt (float s) {
+	public Vector3 GetVelocityAt (float s)
+	{
 		return getCurveAt(s).Velocity(s % 1);
 	}
 
-	public float DistanceFromCurve (Vector3 point) {
+	public float DistanceFromCurve (Vector3 point)
+	{
 		return currentPlayerCurve.ClosestDistanceToPoint(point);
 	}
 
-	void onGateCollision (CurveSegment toSet) {
+	void onGateCollision (CurveSegment toSet)
+	{
 		currentPlayerCurve = toSet;
 	}
 
-	CurveSegment getCurveAt (float s) {
+	CurveSegment getCurveAt (float s)
+	{
 		int index = Mathf.FloorToInt(s);
 		if (index > curves.Count / 2) addNewCurve();
 
 		return curves[index];
 	}
 
-	Vector3 newPointOffset () {
+	Vector3 newPointOffset ()
+	{
 		Vector2 xy = Random.insideUnitCircle * (60 + curves.Count / 2.0f);
 		float z = Random.Range(30, 50);
 
 		return new Vector3(xy.x, xy.y, z);
 	}
 
-	void addNewCurve () {
+	void addNewCurve ()
+	{
 		CurveSegment prev = previous;
 		CurveSegment next = new CurveSegment(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset());
 
@@ -100,12 +108,13 @@ public class Track : Singleton<Track> {
 
 		Vector3 centerDirection = Vector3.zero;
 
-		for (int i = 0; i < samples.Length; i++) {
-
+		for (int i = 0; i < samples.Length; i++)
+		{
 			Vector3 point = samples[i].Item1;
 
 			bool start = i == 0, end = i == samples.Length-1;
-			if (start || end) {
+			if (start || end)
+			{
 				var offset = (start ? Vector3.forward : Vector3.back) * 0.25f;
 				var g = Instantiate(LineGate, point + offset, Quaternion.identity);
 				g.transform.parent = parent.transform;
@@ -114,7 +123,8 @@ public class Track : Singleton<Track> {
 
 			centerDirection += point - (i > 0 ? samples[i-1].Item1 : point);
 
-			if (centerCycleCounter++ >= centerCycle) {
+			if (centerCycleCounter++ >= centerCycle)
+			{
 				Instantiate(CenterGameObject, point, Quaternion.Euler(samples[i-1].Item1 - point)).transform.parent = parent.transform;
 				centerDirection = Vector3.zero;
 				centerCycleCounter = 0;
@@ -123,16 +133,14 @@ public class Track : Singleton<Track> {
 			CenterLine.SetPosition(CenterLine.positionCount++, point);
 
 			float angle = 0;
-			foreach (var line in Lines) {
+			foreach (var line in Lines)
+			{
 				Vector3 dir = Vector3.Slerp(Vector3.forward, samples[i].Item2.normalized, .25f);
 				Vector3 dot = point + Quaternion.AngleAxis(angle, dir) * Vector3.right * LineDistance;
 				line.SetPosition(line.positionCount++, dot);
 
 				angle += 360f / Lines.Length;
 			}
-
 		}
-
 	}
-
 }

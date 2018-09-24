@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using crass;
 
-public class PlayerManager : Singleton<PlayerManager> {
-
+public class PlayerManager : Singleton<PlayerManager> 
+{
 	public Transform CameraRotator;
 	public Text CenterText;
 	public Camera CameraT;
@@ -23,47 +23,57 @@ public class PlayerManager : Singleton<PlayerManager> {
 
 	bool quitting;
 
-	void Start () {
+	void Start () 
+	{
 		SingletonSetInstance(this, true);		
 		
 		StartCoroutine(startRoutine());
 	}
 
-	void Update () {
-		if (!quitting && Input.GetButton("Quit Game")) {
+	void Update () 
+	{
+		if (!quitting && Input.GetButton("Quit Game")) 
+		{
 			quitting = true;
 			StartCoroutine(quit());
 		}
 	}
 	
-	void OnTriggerEnter (Collider other) {
-		if (other.tag == "Evil") {
+	void OnTriggerEnter (Collider other) 
+	{
+		if (other.tag == "Evil") 
+		{
 			StartCoroutine(endRoutine());
 		}
 	}
 
-	public void SetControlsActive (bool value) {
+	public void SetControlsActive (bool value) 
+	{
 		GetComponent<ThrusterController>().enabled = value;
 		GetComponent<RotationalThrust>().enabled = value;
-		foreach (var thruster in GetComponents<TranslationalThrust>()) {
+		foreach (var thruster in GetComponents<TranslationalThrust>()) 
+		{
 			thruster.enabled = value;
 		}
 	}
 
-	public void GameOver () {
+	public void GameOver () 
+	{
 		if (Dead) return;
 		Dead = true;
 		StartCoroutine(endRoutine());
 	}
 
-	IEnumerator startRoutine () {
+	IEnumerator startRoutine () 
+	{
 		yield return null;
 
 #if !UNITY_EDITOR
 		SkipIntro = false;
 #endif
 
-		if (!SkipIntro) {
+		if (!SkipIntro) 
+		{
 			SetControlsActive(false);
 
 			CenterText.text = "Catch the Power Crystal";
@@ -90,7 +100,8 @@ public class PlayerManager : Singleton<PlayerManager> {
 		CenterText.text = "";
 	}
 
-	IEnumerator endRoutine () {
+	IEnumerator endRoutine () 
+	{
 		SetControlsActive(false);
 
 		CameraCache.Main.transform.parent = null;
@@ -106,9 +117,9 @@ public class PlayerManager : Singleton<PlayerManager> {
 		StartCoroutine(quit());
 	}
 
-	IEnumerator quit () {
+	IEnumerator quit () 
+	{
 		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("main");
 		yield return new WaitUntil(() => asyncLoad.isDone);
 	}
-
 }

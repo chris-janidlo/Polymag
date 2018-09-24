@@ -8,8 +8,8 @@ using UnityEditor;
 #endif
 
 [RequireComponent(typeof(ThrusterController))]
-public class TranslationalThrust : MonoBehaviour {
-
+public class TranslationalThrust : MonoBehaviour
+{
 	public string InputAxisName;
 	
 	public Vector3 ForceAxis;
@@ -22,24 +22,28 @@ public class TranslationalThrust : MonoBehaviour {
 
 	Rigidbody rb;
 
-	void Start () {
+	void Start ()
+	{
 		OnValidate();
 		rb = GetComponent<Rigidbody>();
 	}
 
-	void Update () {
+	void Update ()
+	{
 		checkForceAxis();
 
 		input = Input.GetAxis(InputAxisName);
 	}
 
-	void FixedUpdate () {
+	void FixedUpdate ()
+	{
 		Activated = input != 0;
 
 		rb.AddRelativeForce(forceAxisNormalized * Thrust * input);
 	}
 
-	void OnValidate () {
+	void OnValidate ()
+	{
 		forceAxisNormalized = ForceAxis.normalized;
 #if UNITY_EDITOR
 		if (EditorApplication.isPlaying) checkForceAxis();
@@ -47,8 +51,10 @@ public class TranslationalThrust : MonoBehaviour {
 	}
 
 	[Conditional("UNITY_EDITOR")]
-	void checkForceAxis () {
-		if (forceAxisNormalized.Equals(Vector3.zero)) {
+	void checkForceAxis ()
+	{
+		if (forceAxisNormalized.Equals(Vector3.zero))
+		{
 			throw new Exception("'" + InputAxisName + "' thruster: ForceAxis " + ForceAxis.ToString() + " is too small to be used as a direction");
 		}
 	}

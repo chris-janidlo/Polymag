@@ -4,17 +4,20 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Text))]
-public class ReplicaText : MonoBehaviour {
+public class ReplicaText : MonoBehaviour
+{
 
 	public Text Primary;
 
 	Text text;
 
-	void Start () {
+	void Start ()
+	{
 		text = GetComponent<Text>();
 	}
 	
-	void Update () {
+	void Update ()
+	{
 		text.text = Primary.text;
 	}
 }

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ThrusterController : MonoBehaviour {
-
+public class ThrusterController : MonoBehaviour
+{
 	public float MaxSpeed;
 	public float DecelTime;
 
@@ -14,21 +14,27 @@ public class ThrusterController : MonoBehaviour {
 
 	Rigidbody rb;
 
-	void Start () {
+	void Start ()
+	{
 		rb = GetComponent<Rigidbody>();	
 	}
 	
-	void FixedUpdate () {
+	void FixedUpdate ()
+	{
 		bool shouldDecelerate = true;
-		foreach (TranslationalThrust thruster in GetComponents<TranslationalThrust>()) {
-			if (thruster.Activated) {
+		foreach (TranslationalThrust thruster in GetComponents<TranslationalThrust>())
+		{
+			if (thruster.Activated)
+			{
 				shouldDecelerate = false;
 				break;
 			}
 		}
 
-		if (shouldDecelerate) {
-			if (!decelerating) {
+		if (shouldDecelerate)
+		{
+			if (!decelerating)
+			{
 				decelerating = true;
 
 				decelTime = 0;
@@ -37,13 +43,14 @@ public class ThrusterController : MonoBehaviour {
 			rb.velocity = Vector3.Lerp(speedAtDecel, Vector3.zero, decelTime);
 			decelTime += Time.deltaTime / DecelTime;
 		}
-		else {
+		else
+		{
 			decelerating = false;
 		}
 
-		if (rb.velocity.sqrMagnitude > MaxSpeed * MaxSpeed) {
+		if (rb.velocity.sqrMagnitude > MaxSpeed * MaxSpeed)
+		{
 			rb.velocity = rb.velocity.normalized * MaxSpeed;
 		}
 	}
-
 }
