@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7478,6 +7478,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 823759289}
+  - component: {fileID: 823759290}
   - component: {fileID: 823759288}
   - component: {fileID: 823759287}
   - component: {fileID: 823759286}
@@ -7569,6 +7570,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &823759290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 823759285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ab3eed56aee468d87ebeadabe6e0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransformsOfInterest:
+  - {fileID: 2092737558}
 --- !u!1 &862307673
 GameObject:
   m_ObjectHideFlags: 0
@@ -9432,6 +9446,7 @@ GameObject:
   - component: {fileID: 1724135491}
   - component: {fileID: 1724135490}
   - component: {fileID: 1724135489}
+  - component: {fileID: 1724135492}
   - component: {fileID: 1724135488}
   - component: {fileID: 1724135487}
   - component: {fileID: 1724135486}
@@ -9545,22 +9560,22 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.04680468
     - serializedVersion: 3
-      time: 12.59409
-      value: 0.95915
-      inSlope: 0.16932552
-      outSlope: 0.16932552
+      time: 0.69863033
+      value: 1.2333019
+      inSlope: 6.3270564
+      outSlope: 6.3270564
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.31563294
+      outWeight: 0.13644657
     - serializedVersion: 3
-      time: 15
+      time: 1
       value: 5
-      inSlope: 0.37049136
+      inSlope: -1.9348645
       outSlope: 1
       tangentMode: 1
       weightedMode: 0
-      inWeight: 0.032403246
+      inWeight: 0.22928827
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -9631,34 +9646,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1835752520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1835752522}
-  - component: {fileID: 1835752521}
-  m_Layer: 0
-  m_Name: Directional Light
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &1835752521
+--- !u!108 &1724135492
 Light:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1835752520}
+  m_GameObject: {fileID: 1724135481}
   m_Enabled: 1
   serializedVersion: 8
-  m_Type: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 10
+  m_Type: 2
+  m_Color: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
+  m_Intensity: 1.5
+  m_Range: 40
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -9683,19 +9682,6 @@ Light:
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!4 &1835752522
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1835752520}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1866203866
 GameObject:
   m_ObjectHideFlags: 0
@@ -14703,6 +14689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2092737558}
   - component: {fileID: 2092737560}
+  - component: {fileID: 2092737562}
   - component: {fileID: 2092737561}
   - component: {fileID: 2092737559}
   m_Layer: 0
@@ -14770,7 +14757,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092737557}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 951f6ec917e064f54b3885433ad65c87, type: 3}
   m_Name: 
@@ -14788,6 +14775,20 @@ MonoBehaviour:
   BackgroundDanger: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
   PickUpScale: 1.15
   PickUpTime: 1
+--- !u!114 &2092737562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2092737557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 312918b7423eb4d4b80435a4c5c8f595, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToEnable:
+  - {fileID: 2092737561}
+  ToDisable: []
 --- !u!1 &2098914219
 GameObject:
   m_ObjectHideFlags: 0
