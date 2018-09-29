@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using crass;
@@ -95,8 +95,8 @@ public class Crystal : MonoBehaviour
 			yield return null;
 		}
 
-		FuelTank.Instance.PickUpCrystal();
-
 		Destroy(gameObject);
+
+		FuelTank.Instance.PickUpCrystal();
 	}
 }
