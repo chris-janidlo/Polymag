@@ -14773,7 +14773,7 @@ MonoBehaviour:
   Fuel: 0
   MaxFuel: 100
   LossPerSecond: 5
-  GainPerCrystal: 30
+  GainPerCrystal: 37
   DangerFlashes: 4
   DangerFlashRate: 0.7
   AmountImage: {fileID: 1537845402}
