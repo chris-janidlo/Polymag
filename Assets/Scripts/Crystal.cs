@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using crass;
@@ -6,7 +6,7 @@ using crass;
 [RequireComponent(typeof(Collider))]
 public class Crystal : MonoBehaviour
 {
-	public float Speed;
+	public AnimationCurve SpeedByPlayerDistance;
 
 	public float ValueAlongCurve;
 
@@ -32,8 +32,10 @@ public class Crystal : MonoBehaviour
 		var position = Track.Instance.GetPositionAt(ValueAlongCurve);
 		var velocity = Track.Instance.GetVelocityAt(ValueAlongCurve);
 
+		float speed = SpeedByPlayerDistance.Evaluate(Vector3.Distance(transform.position, PlayerManager.Instance.transform.position));
+
 		// FIXME: speed is smooth, but not constant across segments of different length
-		ValueAlongCurve += Speed / velocity.magnitude;
+		ValueAlongCurve += speed / velocity.magnitude;
 
 		transform.position = position;
 	}

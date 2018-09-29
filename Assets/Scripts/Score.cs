@@ -6,11 +6,18 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour
 {
 	public float IncreasePerSecond, Value;
+
+	Text text;
+
+	void Start ()
+	{
+		text = GetComponent<Text>();
+	}
 	
 	void Update ()
 	{
 		if (PlayerManager.Instance.Started && !PlayerManager.Instance.Dead)
 			Value += IncreasePerSecond * Time.deltaTime;
-		GetComponent<Text>().text = Mathf.Ceil(Value).ToString();
+		text.text = Mathf.Ceil(Value).ToString();
 	}
 }

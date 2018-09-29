@@ -18,8 +18,8 @@ public class Track : Singleton<Track>
 
 	[Tooltip("Define multiple line renderers here. Lines are distributed equally in a circle around the center, definition line")]
 	public LineRenderer[] Lines;
-	[Tooltip("Distance from each line to the center")]
-	public float LineDistance = 5;
+	[Tooltip("Distance between the outer lines and the center one as a function of the number of curve segments")]
+	public AnimationCurve TrackRadius;
 	[Tooltip("Resolution of each line")]
 	public int DotsPerLine = 20;
 	public int CenterObjectsPerLine = 5;
@@ -46,7 +46,7 @@ public class Track : Singleton<Track>
 		curveParent.parent = transform;
 
 		// Vector3 next = Vector3.forward * 10;
-		curves.Add(new CurveSegment(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2));
+		curves.Add(new CurveSegment(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2, TrackRadius.Evaluate(0)));
 
 		currentPlayerCurve = curves[0];
 
@@ -64,9 +64,9 @@ public class Track : Singleton<Track>
 		return getCurveAt(s).Velocity(s % 1);
 	}
 
-	public float DistanceFromCurve (Vector3 point)
+	public float DistanceFromCurve (Vector3 point, int samples)
 	{
-		return currentPlayerCurve.ClosestDistanceToPoint(point);
+		return currentPlayerCurve.ClosestDistanceToPoint(point, samples);
 	}
 
 	void onGateCollision (CurveSegment toSet)
@@ -77,6 +77,7 @@ public class Track : Singleton<Track>
 	CurveSegment getCurveAt (float s)
 	{
 		int index = Mathf.FloorToInt(s);
+		// FIXME: calls addNewCurve twice in same frame?
 		if (index > curves.Count / 2) addNewCurve();
 
 		return curves[index];
@@ -84,7 +85,7 @@ public class Track : Singleton<Track>
 
 	Vector3 newPointOffset ()
 	{
-		Vector2 xy = Random.insideUnitCircle * (60 + curves.Count / 2.0f);
+		Vector2 xy = Random.insideUnitCircle * 60;
 		float z = Random.Range(30, 50);
 
 		return new Vector3(xy.x, xy.y, z);
@@ -93,7 +94,9 @@ public class Track : Singleton<Track>
 	void addNewCurve ()
 	{
 		CurveSegment prev = previous;
-		CurveSegment next = new CurveSegment(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset());
+
+		float nextRadius = TrackRadius.Evaluate(curves.Count + 1);
+		CurveSegment next = new CurveSegment(prev.p1, prev.p2, prev.p3, prev.p3 + newPointOffset(), nextRadius);
 
 		curves.Add(next);
 
@@ -101,18 +104,19 @@ public class Track : Singleton<Track>
 		parent.transform.parent = curveParent;
 		curveObjects.Add(parent);
 
-		var samples = previous.Samples(DotsPerLine);
+		var positions = previous.SamplePositions(DotsPerLine);
+		var velocities = previous.SampleVelocities(DotsPerLine);
 
 		int centerCycleCounter = 0;
 		int centerCycle = DotsPerLine / CenterObjectsPerLine;
 
 		Vector3 centerDirection = Vector3.zero;
 
-		for (int i = 0; i < samples.Length; i++)
+		for (int i = 0; i < positions.Length; i++)
 		{
-			Vector3 point = samples[i].Item1;
+			Vector3 point = positions[i];
 
-			bool start = i == 0, end = i == samples.Length-1;
+			bool start = i == 0, end = i == positions.Length-1;
 			if (start || end)
 			{
 				var offset = (start ? Vector3.forward : Vector3.back) * 0.25f;
@@ -121,11 +125,11 @@ public class Track : Singleton<Track>
 				g.GetComponent<LineGate>().Initialize(next, onGateCollision);
 			}
 
-			centerDirection += point - (i > 0 ? samples[i-1].Item1 : point);
+			centerDirection += point - (i > 0 ? positions[i-1] : point);
 
 			if (centerCycleCounter++ >= centerCycle)
 			{
-				Instantiate(CenterGameObject, point, Quaternion.Euler(samples[i-1].Item1 - point)).transform.parent = parent.transform;
+				Instantiate(CenterGameObject, point, Quaternion.Euler(positions[i-1] - point)).transform.parent = parent.transform;
 				centerDirection = Vector3.zero;
 				centerCycleCounter = 0;
 			}
@@ -135,8 +139,8 @@ public class Track : Singleton<Track>
 			float angle = 0;
 			foreach (var line in Lines)
 			{
-				Vector3 dir = Vector3.Slerp(Vector3.forward, samples[i].Item2.normalized, .25f);
-				Vector3 dot = point + Quaternion.AngleAxis(angle, dir) * Vector3.right * LineDistance;
+				Vector3 dir = Vector3.Slerp(Vector3.forward, velocities[i].normalized, .25f);
+				Vector3 dot = point + Quaternion.AngleAxis(angle, dir) * Vector3.right * next.Radius;
 				line.SetPosition(line.positionCount++, dot);
 
 				angle += 360f / Lines.Length;

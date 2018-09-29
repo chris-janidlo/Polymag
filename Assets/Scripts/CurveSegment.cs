@@ -7,14 +7,19 @@ public class CurveSegment
 	// set from 0-1
 	public float Alpha;
 
+	public float Radius;
+
 	// control points
 	public Vector3 p0, p1, p2, p3;
 
+	Dictionary<int, Vector3[]> positionSamples, velocitySamples;
+
 	float t0, t1, t2, t3;
 	
-	public CurveSegment (Vector3 previous, Vector3 current, Vector3 next, Vector3 future, float alpha = 0.5f)
+	public CurveSegment (Vector3 previous, Vector3 current, Vector3 next, Vector3 future, float radius, float alpha = 0.5f)
 	{
 		Alpha = alpha;
+		Radius = radius;
 
 		p0 = previous;
 		p1 = current;
@@ -25,6 +30,9 @@ public class CurveSegment
 		t1 = getT(t0, p0, p1);
 		t2 = getT(t1, p1, p2);
 		t3 = getT(t2, p2, p3);
+
+		positionSamples = new Dictionary<int, Vector3[]>();
+		velocitySamples = new Dictionary<int, Vector3[]>();
 	}
 	
 	// interpolates from 0 to 1 over the curve
@@ -44,18 +52,14 @@ public class CurveSegment
 		return C;
 	}
 
-	// returns pairs of Position, Velocity n times along the curve
-	public System.Tuple<Vector3, Vector3>[] Samples (int n)
+	public Vector3[] SamplePositions (int n)
 	{
-		var samples = new System.Tuple<Vector3, Vector3>[n];
+		return samples(true, n);
+	}
 
-		for (int i = 0; i < n; i++)
-		{
-			float t = i * (1.0f / n);
-			samples[i] = new System.Tuple<Vector3, Vector3>(Position(t), Velocity(t));
-		}
-		
-		return samples;
+	public Vector3[] SampleVelocities (int n)
+	{
+		return samples(false, n);
 	}
 
 	// returns instantaneous derivative at time t on curve
@@ -72,15 +76,36 @@ public class CurveSegment
 		return dC_dt / (t2 - t1);
 	}
 
-	public float ClosestDistanceToPoint (Vector3 point, int samples = 41)
+	// calculates the smallest distance as a percentage of the radius
+	public float ClosestDistanceToPoint (Vector3 point, int samples)
 	{
 		float smallestDist = float.MaxValue;
-		foreach (var sample in Samples(samples))
+		foreach (var sample in SamplePositions(samples))
 		{
-			float dist = Vector3.Distance(point, sample.Item1);
+			float dist = Vector3.Distance(point, sample);
 			smallestDist = Mathf.Min(smallestDist, dist);
 		}
-		return smallestDist;
+		return smallestDist / Radius;
+	}
+
+	Vector3[] samples (bool pos, int n)
+	{
+		var dict = pos ? positionSamples : velocitySamples;
+		Vector3[] samples;
+
+		dict.TryGetValue(n, out samples);
+		if (samples != null) return samples;
+
+		samples = new Vector3[n];
+
+		for (int i = 0; i < n; i++)
+		{
+			float t = i * (1.0f / n);
+			samples[i] = pos ? Position(t) : Velocity(t);
+		}
+		
+		dict[n] = samples;
+		return samples;
 	}
 
 	float getT (float t, Vector3 p0, Vector3 p1)

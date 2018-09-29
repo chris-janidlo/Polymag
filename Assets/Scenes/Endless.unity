@@ -642,7 +642,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 823759289}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -996,23 +996,30 @@ MonoBehaviour:
   - {fileID: 1616423742}
   - {fileID: 1473960008}
   - {fileID: 1077703140}
-  - {fileID: 2065844439}
-  - {fileID: 773006543}
-  - {fileID: 565627125}
-  - {fileID: 1136595778}
-  - {fileID: 13284825}
-  - {fileID: 1866203868}
-  - {fileID: 606652526}
-  - {fileID: 1421009056}
-  - {fileID: 1422355403}
-  - {fileID: 1599242660}
-  - {fileID: 229615790}
-  - {fileID: 554970173}
-  - {fileID: 669359984}
-  - {fileID: 1158866878}
-  - {fileID: 1554913076}
-  - {fileID: 36739322}
-  LineDistance: 30
+  TrackRadius:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 30
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 50
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   DotsPerLine: 30
   CenterObjectsPerLine: 5
 --- !u!4 &209571095
@@ -1301,12 +1308,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 823759289}
-  m_RootOrder: 1
+  m_Father: {fileID: 926194052}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 50, y: 85}
+  m_AnchoredPosition: {x: -2.1699154, y: 1.6999528}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &466464558
@@ -1330,7 +1337,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
-    m_FontSize: 16
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -1868,7 +1875,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -2.880005, y: 3.15}
+  m_AnchoredPosition: {x: -2.8798828, y: 3.15}
   m_SizeDelta: {x: 0.00000023841858, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655021223
@@ -7594,7 +7601,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 926194052}
-  - {fileID: 466464557}
   - {fileID: 2092737558}
   - {fileID: 975366854}
   - {fileID: 1577681565}
@@ -7693,15 +7699,16 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 466464557}
   m_Father: {fileID: 823759289}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 52.169983, y: 83.3}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -30}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &926194053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7735,7 +7742,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
-    m_FontSize: 16
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -7783,12 +7790,12 @@ RectTransform:
   m_Children:
   - {fileID: 655021222}
   m_Father: {fileID: 823759289}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -3.15}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -160, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &975366855
 MonoBehaviour:
@@ -8847,7 +8854,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2.8799973, y: 3.1499996}
+  m_AnchoredPosition: {x: -2.880005, y: 3.149994}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1537845402
@@ -8873,7 +8880,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 0
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -9035,11 +9042,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 823759289}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 2.88, y: -53.149994}
+  m_AnchoredPosition: {x: 2.88, y: -53.149902}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1577681566
@@ -9556,7 +9563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PitchInputAxis: Pitch
   YawInputAxis: Turn
-  TurnSpeed: 1.5
+  TurnSpeed: 2
 --- !u!114 &1724135486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9616,6 +9623,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  CurveDistanceSamples: 20
 --- !u!114 &1724135488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14707,17 +14715,17 @@ RectTransform:
   m_GameObject: {fileID: 2092737557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1537845401}
   m_Father: {fileID: 823759289}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 150, y: 50}
-  m_SizeDelta: {x: 250, y: 37}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 40, y: -15}
+  m_SizeDelta: {x: 37, y: -70}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2092737559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14757,15 +14765,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2092737557}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 951f6ec917e064f54b3885433ad65c87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Fuel: 0
   MaxFuel: 100
-  LossPerSecond: 7
-  GainPerCrystal: 100
+  LossPerSecond: 2
+  GainPerCrystal: 30
   DangerFlashes: 4
   DangerFlashRate: 0.7
   AmountImage: {fileID: 1537845402}
@@ -14773,8 +14781,8 @@ MonoBehaviour:
   AmountLerp: 0.8
   BackgroundNeutral: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
   BackgroundDanger: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
-  PickUpScale: 1.15
-  PickUpTime: 1
+  PickUpScale: 1.05
+  PickUpTime: 0.25
 --- !u!114 &2092737562
 MonoBehaviour:
   m_ObjectHideFlags: 0
