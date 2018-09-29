@@ -9,7 +9,8 @@ public class CrystalManager : Singleton<CrystalManager>
 
 	public float FirstSpawnDistance;
 
-	public float NewSpawnDelay;
+	[Tooltip("We wait (this delay * percent fuel left) seconds before spawning the next crystal.")]
+	public float NewSpawnDelayMax;
 	public Vector2 NewSpawnDistanceRange;
 
 	[Tooltip("On being caught, crystals will travel to this target.")]
@@ -31,7 +32,7 @@ public class CrystalManager : Singleton<CrystalManager>
 
 	IEnumerator spawnNewCrystal (float oldDistance)
 	{
-		yield return new WaitForSeconds(NewSpawnDelay);
+		yield return new WaitForSeconds(NewSpawnDelayMax * FuelTank.Instance.PercentRemaining);
 
 		float newDistance = oldDistance + Random.Range(NewSpawnDistanceRange.x, NewSpawnDistanceRange.y);
 		spawnCrystal(newDistance);

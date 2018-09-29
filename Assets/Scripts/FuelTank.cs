@@ -18,6 +18,8 @@ public class FuelTank : Singleton<FuelTank>
 
 	public float PickUpScale, PickUpTime;
 
+	public float PercentRemaining { get { return Fuel / MaxFuel; } }
+
 	Vector3 origScale;
 
 	bool inDanger;
@@ -40,7 +42,7 @@ public class FuelTank : Singleton<FuelTank>
 			Fuel = Mathf.Clamp(Fuel, 0, MaxFuel);
 		}
 		
-		AmountImage.fillAmount = Mathf.Lerp(AmountImage.fillAmount, Fuel / MaxFuel, AmountLerp);
+		AmountImage.fillAmount = Mathf.Lerp(AmountImage.fillAmount, PercentRemaining, AmountLerp);
 
 		if (Fuel == 0 && !inDanger)
 		{

@@ -7656,7 +7656,7 @@ MonoBehaviour:
   CrystalPrefab: {fileID: 114101288050187216, guid: 9df6523c5b89841dca286205da2cd5d7,
     type: 2}
   FirstSpawnDistance: 2
-  NewSpawnDelay: 2
+  NewSpawnDelayMax: 2
   NewSpawnDistanceRange: {x: 1.5, y: 2}
   DeathTarget: {fileID: 2092737558}
 --- !u!4 &862307675
