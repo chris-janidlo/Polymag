@@ -7,7 +7,7 @@ using crass;
 public class FuelTank : Singleton<FuelTank>
 {
 	public float Fuel, MaxFuel, LossPerSecond, GainPerCrystal;
-	
+
 	public int DangerFlashes;
 	public float DangerFlashRate;
 
@@ -19,6 +19,19 @@ public class FuelTank : Singleton<FuelTank>
 	public float PickUpScale, PickUpTime;
 
 	public float PercentRemaining { get { return Fuel / MaxFuel; } }
+
+	[SerializeField]
+	private bool _disableDying;
+	public bool DisableDying
+	{
+		get { return _disableDying; }
+		set
+		{
+			if (value)
+				resetDangerTimer();
+			_disableDying = value;
+		}
+	}
 
 	Vector3 origScale;
 
@@ -47,7 +60,7 @@ public class FuelTank : Singleton<FuelTank>
 		if (Fuel == 0 && !inDanger)
 		{
 			inDanger = true;
-			dangerTimer = DangerFlashes * DangerFlashRate;
+			resetDangerTimer();
 		}
 		if (Fuel != 0 && inDanger)
 		{
@@ -68,7 +81,7 @@ public class FuelTank : Singleton<FuelTank>
 			}
 
 			dangerTimer -= Time.deltaTime;
-			if (dangerTimer <= 0)
+			if (!DisableDying && dangerTimer <= 0)
 			{
 				PlayerManager.Instance.GameOver();
 			}
@@ -81,8 +94,14 @@ public class FuelTank : Singleton<FuelTank>
 
 	public void PickUpCrystal ()
 	{
+		inDanger = false;
 		Fuel += GainPerCrystal;
 		StartCoroutine(pickUpAnimation());
+	}
+
+	void resetDangerTimer ()
+	{
+		dangerTimer = DangerFlashes * DangerFlashRate;
 	}
 
 	IEnumerator pickUpAnimation ()

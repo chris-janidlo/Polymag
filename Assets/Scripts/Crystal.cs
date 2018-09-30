@@ -8,6 +8,9 @@ public class Crystal : MonoBehaviour
 {
 	public AnimationCurve SpeedByPlayerDistance;
 
+	[Tooltip("Distance from crystal within which player is safe from dying")]
+	public float SafeDistance;
+
 	public float ValueAlongCurve;
 
 	public Vector3 RotationAxis;
@@ -32,12 +35,15 @@ public class Crystal : MonoBehaviour
 		var position = Track.Instance.GetPositionAt(ValueAlongCurve);
 		var velocity = Track.Instance.GetVelocityAt(ValueAlongCurve);
 
-		float speed = SpeedByPlayerDistance.Evaluate(Vector3.Distance(transform.position, PlayerManager.Instance.transform.position));
+		float distance = Vector3.Distance(transform.position, PlayerManager.Instance.transform.position);
+		float speed = SpeedByPlayerDistance.Evaluate(distance);
 
 		// FIXME: speed is smooth, but not constant across segments of different length
 		ValueAlongCurve += speed / velocity.magnitude;
 
 		transform.position = position;
+
+		FuelTank.Instance.DisableDying = distance <= SafeDistance;
 	}
 
 	public void Initialize (float s)
@@ -80,6 +86,8 @@ public class Crystal : MonoBehaviour
 
 	IEnumerator deathSequence ()
 	{
+		FuelTank.Instance.DisableDying = true;
+
 		GetComponent<Collider>().enabled = false;
 		dead = true;
 
@@ -100,5 +108,6 @@ public class Crystal : MonoBehaviour
 		Destroy(gameObject);
 
 		FuelTank.Instance.PickUpCrystal();
+		FuelTank.Instance.DisableDying = false;
 	}
 }
