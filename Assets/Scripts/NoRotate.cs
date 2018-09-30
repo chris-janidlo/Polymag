@@ -8,5 +8,4 @@ public class NoRotate : MonoBehaviour
 	{
 		transform.rotation = Quaternion.identity;
 	}
-
 }

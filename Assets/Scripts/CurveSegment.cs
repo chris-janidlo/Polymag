@@ -52,16 +52,6 @@ public class CurveSegment
 		return C;
 	}
 
-	public Vector3[] SamplePositions (int n)
-	{
-		return samples(true, n);
-	}
-
-	public Vector3[] SampleVelocities (int n)
-	{
-		return samples(false, n);
-	}
-
 	// returns instantaneous derivative at time t on curve
 	// from https://math.stackexchange.com/a/848290/574705
 	public Vector3 Velocity (float t)
@@ -76,7 +66,7 @@ public class CurveSegment
 		return dC_dt / (t2 - t1);
 	}
 
-	// calculates the smallest distance as a percentage of the radius
+	// calculates the smallest distance from this curve to the given point, as a percentage of this curves radius
 	public float ClosestDistanceToPoint (Vector3 point, int samples)
 	{
 		float smallestDist = float.MaxValue;
@@ -86,6 +76,16 @@ public class CurveSegment
 			smallestDist = Mathf.Min(smallestDist, dist);
 		}
 		return smallestDist / Radius;
+	}
+
+	public Vector3[] SamplePositions (int n)
+	{
+		return samples(true, n);
+	}
+
+	public Vector3[] SampleVelocities (int n)
+	{
+		return samples(false, n);
 	}
 
 	Vector3[] samples (bool pos, int n)

@@ -38,10 +38,10 @@ public class Crystal : MonoBehaviour
 		float distance = Vector3.Distance(transform.position, PlayerManager.Instance.transform.position);
 		float speed = SpeedByPlayerDistance.Evaluate(distance);
 
+		transform.position = position;
+
 		// FIXME: speed is smooth, but not constant across segments of different length
 		ValueAlongCurve += speed / velocity.magnitude;
-
-		transform.position = position;
 
 		FuelTank.Instance.DisableDying = distance <= SafeDistance;
 	}
