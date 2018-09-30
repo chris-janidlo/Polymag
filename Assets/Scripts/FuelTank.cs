@@ -39,7 +39,7 @@ public class FuelTank : Singleton<FuelTank>
 		if (PlayerManager.Instance.Started)
 		{
 			Fuel -= LossPerSecond * Time.deltaTime;
-			Fuel = Mathf.Clamp(Fuel, 0, MaxFuel);
+			Fuel = Mathf.Clamp(Fuel, 0, 2*MaxFuel);
 		}
 		
 		AmountImage.fillAmount = Mathf.Lerp(AmountImage.fillAmount, PercentRemaining, AmountLerp);
