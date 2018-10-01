@@ -27,7 +27,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4883995325257092
 Transform:
   m_ObjectHideFlags: 1
@@ -225,9 +225,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 4
+      minMaxState: 0
       minColor: {r: 0.40392157, g: 0.2901961, b: 0.2784314, a: 1}
-      maxColor: {r: 0.6862745, g: 0.6666667, b: 0.7254902, a: 1}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
@@ -289,8 +289,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 2
-      minScalar: 1
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -668,7 +668,7 @@ ParticleSystem:
     angle: 0
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 0.95
+    radiusThickness: 0.7
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: -2.5}
     m_Rotation: {x: 0, y: 0, z: 0}
@@ -693,7 +693,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 137
+      value: 250
       mode: 0
       spread: 0
       speed:
@@ -751,7 +751,7 @@ ParticleSystem:
           m_RotationOrder: 4
     arc:
       value: 360
-      mode: 3
+      mode: 0
       spread: 0
       speed:
         serializedVersion: 2

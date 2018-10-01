@@ -996,22 +996,6 @@ MonoBehaviour:
   - {fileID: 1616423742}
   - {fileID: 1473960008}
   - {fileID: 1077703140}
-  - {fileID: 2065844439}
-  - {fileID: 773006543}
-  - {fileID: 565627125}
-  - {fileID: 1136595778}
-  - {fileID: 13284825}
-  - {fileID: 1866203868}
-  - {fileID: 606652526}
-  - {fileID: 1421009056}
-  - {fileID: 1422355403}
-  - {fileID: 1599242660}
-  - {fileID: 229615790}
-  - {fileID: 554970173}
-  - {fileID: 669359984}
-  - {fileID: 1158866878}
-  - {fileID: 1554913076}
-  - {fileID: 36739322}
   TrackRadius:
     serializedVersion: 2
     m_Curve:
@@ -1027,8 +1011,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 60
       value: 7
-      inSlope: -0.38333333
-      outSlope: -0.38333333
+      inSlope: -0.5283152
+      outSlope: -0.5283152
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 73
+      value: 0
+      inSlope: -0.53846157
+      outSlope: -0.53846157
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -8390,7 +8383,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.9607843, g: 0.95686275, b: 0.92156863, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 0.9607843, g: 0.95686275, b: 0.92156863, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -10167,8 +10160,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
-      minScalar: 1
+      scalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -10800,7 +10793,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 1300
+        scalar: 1000
         minScalar: 0
         maxCurve:
           serializedVersion: 2
