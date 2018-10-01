@@ -8,6 +8,8 @@ public class FuelTank : Singleton<FuelTank>
 {
 	public float Fuel, MaxFuel, LossPerSecond, GainPerCrystal;
 
+	public int TankDivisions;
+
 	public int DangerFlashes;
 	public float DangerFlashRate;
 
@@ -55,7 +57,7 @@ public class FuelTank : Singleton<FuelTank>
 			Fuel = Mathf.Clamp(Fuel, 0, 2*MaxFuel);
 		}
 		
-		AmountImage.fillAmount = Mathf.Lerp(AmountImage.fillAmount, PercentRemaining, AmountLerp);
+		AmountImage.fillAmount = imageFillAmount();
 
 		if (Fuel == 0 && !inDanger)
 		{
@@ -97,6 +99,13 @@ public class FuelTank : Singleton<FuelTank>
 		inDanger = false;
 		Fuel += GainPerCrystal;
 		StartCoroutine(pickUpAnimation());
+	}
+
+	float imageFillAmount ()
+	{
+		float amountPerTank = MaxFuel / TankDivisions;
+		float roundedFuel = Mathf.Ceil(Fuel / amountPerTank) * amountPerTank;
+		return Mathf.Lerp(AmountImage.fillAmount, roundedFuel / MaxFuel, AmountLerp);
 	}
 
 	void resetDangerTimer ()

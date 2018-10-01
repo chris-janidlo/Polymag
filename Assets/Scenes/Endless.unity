@@ -7609,8 +7609,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 926194052}
   - {fileID: 2092737558}
+  - {fileID: 926194052}
   - {fileID: 975366854}
   - {fileID: 1577681565}
   - {fileID: 90350047}
@@ -7711,7 +7711,7 @@ RectTransform:
   m_Children:
   - {fileID: 466464557}
   m_Father: {fileID: 823759289}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -14728,7 +14728,7 @@ RectTransform:
   m_Children:
   - {fileID: 1537845401}
   m_Father: {fileID: 823759289}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
@@ -14783,6 +14783,7 @@ MonoBehaviour:
   MaxFuel: 100
   LossPerSecond: 5
   GainPerCrystal: 37
+  TankDivisions: 8
   DangerFlashes: 3
   DangerFlashRate: 0.7
   AmountImage: {fileID: 1537845402}
