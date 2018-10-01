@@ -41,7 +41,7 @@ public class Crystal : MonoBehaviour
 		transform.position = position;
 
 		// FIXME: speed is smooth, but not constant across segments of different length
-		ValueAlongCurve += speed / velocity.magnitude;
+		ValueAlongCurve += speed * Time.deltaTime / velocity.magnitude;
 
 		FuelTank.Instance.DisableDying = distance <= SafeDistance;
 	}

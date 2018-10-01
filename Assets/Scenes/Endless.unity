@@ -1919,11 +1919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'There is no excuse.
-
-    Merely now it is quasi-Bicchu.
-
-    Please wait already for a while.'
+  m_Text: 
 --- !u!222 &655021224
 CanvasRenderer:
   m_ObjectHideFlags: 0
