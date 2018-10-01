@@ -16,8 +16,8 @@ RenderSettings:
   serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogMode: 1
+  m_FogDensity: 1
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -996,6 +996,22 @@ MonoBehaviour:
   - {fileID: 1616423742}
   - {fileID: 1473960008}
   - {fileID: 1077703140}
+  - {fileID: 2065844439}
+  - {fileID: 773006543}
+  - {fileID: 565627125}
+  - {fileID: 1136595778}
+  - {fileID: 13284825}
+  - {fileID: 1866203868}
+  - {fileID: 606652526}
+  - {fileID: 1421009056}
+  - {fileID: 1422355403}
+  - {fileID: 1599242660}
+  - {fileID: 229615790}
+  - {fileID: 554970173}
+  - {fileID: 669359984}
+  - {fileID: 1158866878}
+  - {fileID: 1554913076}
+  - {fileID: 36739322}
   TrackRadius:
     serializedVersion: 2
     m_Curve:
@@ -10784,7 +10800,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 800
+        scalar: 1300
         minScalar: 0
         maxCurve:
           serializedVersion: 2
@@ -14835,7 +14851,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 400
   field of view: 60
   orthographic: 0
   orthographic size: 5
