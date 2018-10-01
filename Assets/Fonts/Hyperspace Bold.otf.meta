@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: b8a28db1cdba74bd4a6d2281768cb0de
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Hyperspace
+  fontNames:
+  - Hyperspace
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 27ddb0768f4474f4fad9a6d46c1380ea, type: 3}
+  - {fileID: 12800000, guid: 95efea1910fd14423aa2b1a1d5e9da11, type: 3}
+  - {fileID: 12800000, guid: 464cff4b68bff4628942b71ae33c8788, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

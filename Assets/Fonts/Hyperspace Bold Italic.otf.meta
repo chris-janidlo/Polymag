@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 019dcb122b07a4a76a22cb70819bc5b6
+guid: 464cff4b68bff4628942b71ae33c8788
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,10 +8,11 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: PR Number 3
+  fontName: Hyperspace
   fontNames:
-  - PR Number 3
-  fallbackFontReferences: []
+  - Hyperspace
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 27ddb0768f4474f4fad9a6d46c1380ea, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

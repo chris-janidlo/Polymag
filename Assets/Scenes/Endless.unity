@@ -669,9 +669,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+    m_Font: {fileID: 12800000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
     m_FontSize: 30
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
@@ -1345,7 +1345,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+    m_Font: {fileID: 12800000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -1884,8 +1884,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -2.8798828, y: 3.15}
-  m_SizeDelta: {x: 0.00000023841858, y: 0}
+  m_AnchoredPosition: {x: -2, y: 2}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655021223
 MonoBehaviour:
@@ -1907,7 +1907,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+    m_Font: {fileID: 12800000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
     m_FontSize: 37
     m_FontStyle: 0
     m_BestFit: 0
@@ -1919,7 +1919,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'There is no excuse.
+
+    Merely now it is quasi-Bicchu.
+
+    Please wait already for a while.'
 --- !u!222 &655021224
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7750,7 +7754,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+    m_Font: {fileID: 12800000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
     m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
@@ -7838,7 +7842,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+    m_Font: {fileID: 12800000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
     m_FontSize: 37
     m_FontStyle: 0
     m_BestFit: 0
@@ -9090,9 +9094,9 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+    m_Font: {fileID: 12800000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
     m_FontSize: 30
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 40
@@ -9652,7 +9656,7 @@ MonoBehaviour:
   StartDelay: 3
   DeathEffect: {fileID: 198456676770121124, guid: 173e35cd6919140429bf28ff2ee9cac7,
     type: 2}
-  SkipIntro: 1
+  SkipIntro: 0
 --- !u!135 &1724135489
 SphereCollider:
   m_ObjectHideFlags: 0

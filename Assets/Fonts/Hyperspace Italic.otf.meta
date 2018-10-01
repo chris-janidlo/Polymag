@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c3033d4c91c7d428084f28804e171557
+guid: 95efea1910fd14423aa2b1a1d5e9da11
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,10 +8,12 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Print Char 21
+  fontName: Hyperspace
   fontNames:
-  - Print Char 21
-  fallbackFontReferences: []
+  - Hyperspace
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 27ddb0768f4474f4fad9a6d46c1380ea, type: 3}
+  - {fileID: 12800000, guid: 464cff4b68bff4628942b71ae33c8788, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
