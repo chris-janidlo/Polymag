@@ -8885,7 +8885,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 48a093bab7c64470ba4adee7bd86028e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a329d0571a1b248d1914ba42cf2fb882, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9652,7 +9652,7 @@ MonoBehaviour:
   StartDelay: 3
   DeathEffect: {fileID: 198456676770121124, guid: 173e35cd6919140429bf28ff2ee9cac7,
     type: 2}
-  SkipIntro: 0
+  SkipIntro: 1
 --- !u!135 &1724135489
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14754,7 +14754,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a329d0571a1b248d1914ba42cf2fb882, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14783,12 +14783,12 @@ MonoBehaviour:
   MaxFuel: 100
   LossPerSecond: 5
   GainPerCrystal: 37
-  TankDivisions: 8
+  TankDivisions: 17
   DangerFlashes: 3
   DangerFlashRate: 0.7
   AmountImage: {fileID: 1537845402}
   BackgroundImage: {fileID: 2092737559}
-  AmountLerp: 0.8
+  AmountLerp: 0.2
   BackgroundNeutral: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
   BackgroundDanger: {r: 0.8627451, g: 0.3254902, b: 0.29411766, a: 1}
   PickUpScale: 1.05
