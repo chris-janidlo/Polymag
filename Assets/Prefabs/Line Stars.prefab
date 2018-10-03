@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 199941206555635542}
   - component: {fileID: 198880043976428334}
   m_Layer: 8
-  m_Name: Line Asteroids
+  m_Name: Line Stars
   m_TagString: Line Markers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
