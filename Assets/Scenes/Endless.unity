@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+  m_Material: {fileID: 2100000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
   m_Color: {r: 0.27450982, g: 0.6862745, b: 0.27058825, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -1336,7 +1336,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+  m_Material: {fileID: 2100000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
   m_Color: {r: 0.27450982, g: 0.6862745, b: 0.27058825, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+  m_Material: {fileID: 2100000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
   m_Color: {r: 0.27450982, g: 0.6862745, b: 0.27058825, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -7740,7 +7740,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+  m_Material: {fileID: 2100000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
   m_Color: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -7828,7 +7828,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+  m_Material: {fileID: 2100000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
   m_Color: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -9131,7 +9131,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -49.999992}
+  m_AnchoredPosition: {x: 0, y: -50}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1577681566
@@ -9157,7 +9157,7 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: c3033d4c91c7d428084f28804e171557, type: 3}
+  m_Material: {fileID: 2100000, guid: b8a28db1cdba74bd4a6d2281768cb0de, type: 3}
   m_Color: {r: 0.27058825, g: 0.24313726, b: 0.47058824, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
@@ -9728,7 +9728,7 @@ MonoBehaviour:
   StartDelay: 4
   DeathEffect: {fileID: 198456676770121124, guid: 173e35cd6919140429bf28ff2ee9cac7,
     type: 2}
-  SkipIntro: 0
+  SkipIntro: 1
 --- !u!135 &1724135489
 SphereCollider:
   m_ObjectHideFlags: 0
