@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33876483573159524}
   - component: {fileID: 23509591545296510}
   - component: {fileID: 95959351433730814}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 4638137998706898}
   - component: {fileID: 135439664832494862}
   - component: {fileID: 114101288050187216}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}

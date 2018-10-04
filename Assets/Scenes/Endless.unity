@@ -483,7 +483,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1024
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -975,8 +975,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NumberOfCurves: 50
-  CenterGameObject: {fileID: 1129418358504716, guid: bf4b755d8a8184d99a72aae0b3c60758,
-    type: 2}
   LineGate: {fileID: 114567739030421718, guid: 336e825e20e9b43e1bd169591f172970, type: 2}
   CenterLine: {fileID: 564154264}
   Lines:
