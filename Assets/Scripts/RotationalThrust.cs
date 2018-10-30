@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RotationalThrust : MonoBehaviour
 {
+	public static bool PitchInverted = false;
+
 	public string PitchInputAxis;
 	public string YawInputAxis;
 	public float TurnSpeed;
@@ -13,7 +15,7 @@ public class RotationalThrust : MonoBehaviour
 	void Update ()
 	{
 		input = new Vector2(
-			Input.GetAxis(PitchInputAxis),
+			Input.GetAxis(PitchInputAxis) * (PitchInverted ? -1 : 1),
 			Input.GetAxis(YawInputAxis)
 		);
 	}

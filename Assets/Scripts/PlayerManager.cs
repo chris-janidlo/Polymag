@@ -7,6 +7,8 @@ using crass;
 
 public class PlayerManager : Singleton<PlayerManager> 
 {
+	public static bool SkipIntro = false;
+
 	public Transform CameraRotator;
 	public Text CenterText;
 	public Camera CameraT;
@@ -16,12 +18,10 @@ public class PlayerManager : Singleton<PlayerManager>
 
 	public ParticleSystem DeathEffect;
 
-	public bool SkipIntro = true;
+	public PausedWhenActive PauseMenu;
 
 	public bool Started { get; private set; }
 	public bool Dead { get; private set; }
-
-	bool quitting;
 
 	void Start () 
 	{
@@ -32,10 +32,9 @@ public class PlayerManager : Singleton<PlayerManager>
 
 	void Update () 
 	{
-		if (!quitting && Input.GetButton("Quit Game")) 
+		if (Input.GetButtonDown("Cancel")) 
 		{
-			quitting = true;
-			StartCoroutine(quit());
+			PauseMenu.gameObject.SetActive(!PauseMenu.gameObject.activeSelf);
 		}
 	}
 	
@@ -45,6 +44,11 @@ public class PlayerManager : Singleton<PlayerManager>
 		{
 			StartCoroutine(endRoutine());
 		}
+	}
+
+	public void Quit ()
+	{
+		SceneManager.LoadScene("Main");
 	}
 
 	public void SetControlsActive (bool value) 
@@ -67,10 +71,6 @@ public class PlayerManager : Singleton<PlayerManager>
 	IEnumerator startRoutine () 
 	{
 		yield return null;
-
-#if !UNITY_EDITOR
-		SkipIntro = false;
-#endif
 
 		if (!SkipIntro) 
 		{
@@ -114,12 +114,6 @@ public class PlayerManager : Singleton<PlayerManager>
 		CenterText.text = "You're Dead!";
 
 		yield return new WaitForSeconds(3.7f);
-		StartCoroutine(quit());
-	}
-
-	IEnumerator quit () 
-	{
-		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("main");
-		yield return new WaitUntil(() => asyncLoad.isDone);
+		SceneManager.LoadScene("Endless");
 	}
 }
