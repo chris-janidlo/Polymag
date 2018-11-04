@@ -1,18 +1,16 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using crass;
 
 public class Track : Singleton<Track>
 {
-	[Tooltip("The total number of segments making up the overall line. Changing this value after the script is loaded has no effect")]
-	public int NumberOfCurves;
+	[Tooltip("The initial number of segments making up the overall line. Changing this value after the script is loaded has no effect")]
+	public int InitialCurves;
 
 	[Tooltip("Spawned at intervals along the line")]
 	public GameObject CenterGameObject;
-
-	[Tooltip("When the player enters this, they have entered the curve segment.")]
-	public LineGate LineGate;
 
 	public LineRenderer CenterLine;
 
@@ -26,14 +24,11 @@ public class Track : Singleton<Track>
 
 	List<CurveSegment> curves;
 	List<GameObject> curveObjects;
+	Dictionary<int, CurveSegment> curvesByClosestZPosition;
 
 	CurveSegment previous { get { return curves[curves.Count - 1]; } }
 
-	CurveSegment currentPlayerCurve;
-
 	Transform curveParent;
-
-	float s;
 
 	void Start ()
 	{
@@ -41,16 +36,14 @@ public class Track : Singleton<Track>
 
 		curves = new List<CurveSegment>();
 		curveObjects = new List<GameObject>();
+		curvesByClosestZPosition = new Dictionary<int, CurveSegment>();
 
 		curveParent = new GameObject("Curves").transform;
 		curveParent.parent = transform;
 
-		// Vector3 next = Vector3.forward * 10;
 		curves.Add(new CurveSegment(Vector3.back * 5, Vector3.back * 4, Vector3.back * 3, Vector3.back * 2, TrackRadius.Evaluate(0)));
 
-		currentPlayerCurve = curves[0];
-
-		for (int i = 0; i < NumberOfCurves; i++)
+		for (int i = 0; i < InitialCurves; i++)
 			addNewCurve();
 	}
 
@@ -66,12 +59,14 @@ public class Track : Singleton<Track>
 
 	public float DistanceFromCurve (Vector3 point, int samples)
 	{
-		return currentPlayerCurve.ClosestDistanceToPoint(point, samples);
-	}
-
-	void onGateCollision (CurveSegment toSet)
-	{
-		currentPlayerCurve = toSet;
+		int z = (int) point.z;
+		
+		if (z < curvesByClosestZPosition.Keys.Min())
+		{
+			return 0;
+		}
+		
+		return curvesByClosestZPosition[z].ClosestDistanceToPoint(point, samples);
 	}
 
 	CurveSegment getCurveAt (float s)
@@ -100,6 +95,11 @@ public class Track : Singleton<Track>
 
 		curves.Add(next);
 
+		for (int i = (int) next.p1.z; i < (int) next.p2.z; i++)
+		{
+			curvesByClosestZPosition[i] = next;
+		}
+
 		var parent = new GameObject("Curve " + curves.Count);
 		parent.transform.parent = curveParent;
 		curveObjects.Add(parent);
@@ -115,15 +115,6 @@ public class Track : Singleton<Track>
 		for (int i = 0; i < positions.Length; i++)
 		{
 			Vector3 point = positions[i];
-
-			bool start = i == 0, end = i == positions.Length-1;
-			if (start || end)
-			{
-				var offset = (start ? Vector3.forward : Vector3.back) * 0.25f;
-				var g = Instantiate(LineGate, point + offset, Quaternion.identity);
-				g.transform.parent = parent.transform;
-				g.GetComponent<LineGate>().Initialize(next, onGateCollision);
-			}
 
 			centerDirection += point - (i > 0 ? positions[i-1] : point);
 

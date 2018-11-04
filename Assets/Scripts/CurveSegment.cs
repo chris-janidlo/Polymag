@@ -12,6 +12,7 @@ public class CurveSegment
 	// control points
 	public Vector3 p0, p1, p2, p3;
 
+	Dictionary<float, Vector3?> positions, velocities;
 	Dictionary<int, Vector3[]> positionSamples, velocitySamples;
 
 	float t0, t1, t2, t3;
@@ -31,6 +32,8 @@ public class CurveSegment
 		t2 = getT(t1, p1, p2);
 		t3 = getT(t2, p2, p3);
 
+		positions = new Dictionary<float, Vector3?>();
+		velocities = new Dictionary<float, Vector3?>();
 		positionSamples = new Dictionary<int, Vector3[]>();
 		velocitySamples = new Dictionary<int, Vector3[]>();
 	}
@@ -38,6 +41,10 @@ public class CurveSegment
 	// interpolates from 0 to 1 over the curve
 	public Vector3 Position (float time)
 	{
+		Vector3? pos;
+		positions.TryGetValue(time, out pos);
+		if (pos != null) return (Vector3) pos;
+
 		float t = time * (t2 - t1) + t1;
 
 		Vector3 A1 = (t1-t)/(t1-t0)*p0 + (t-t0)/(t1-t0)*p1;
@@ -49,6 +56,7 @@ public class CurveSegment
 		
 		Vector3 C = (t2-t)/(t2-t1)*B1 + (t-t1)/(t2-t1)*B2;
 		
+		positions[time] = C;
 		return C;
 	}
 
@@ -56,6 +64,10 @@ public class CurveSegment
 	// from https://math.stackexchange.com/a/848290/574705
 	public Vector3 Velocity (float t)
 	{
+		Vector3? vel;
+		velocities.TryGetValue(t, out vel);
+		if (vel != null) return (Vector3) vel;
+
 		Vector3 Q1 = (p1 - p0) / (t1 - t0) - (p2 - p0) / (t2 - t0) + (p2 - p1) / (t2 - t1);
 		Vector3 Q2 = (p2 - p1) / (t2 - t1) - (p3 - p1) / (t3 - t1) + (p3 - p2) / (t3 - t2);
 
@@ -63,7 +75,9 @@ public class CurveSegment
 		Vector3 R2 = p2 - Q2 * (t2 - t1) / 3f;
 
 		Vector3 dC_dt = 3*(Mathf.Pow(1-t, 2)*(R1-p1) + 2*t*(1-t)*(R2-R1) + Mathf.Pow(t, 2)*(p2-R2));
-		return dC_dt / (t2 - t1);
+		
+		vel = dC_dt / (t2 - t1);
+		return (Vector3) vel;
 	}
 
 	// calculates the smallest distance from this curve to the given point, as a percentage of this curves radius
